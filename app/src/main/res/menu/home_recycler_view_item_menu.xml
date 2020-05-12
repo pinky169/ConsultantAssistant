@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home_recycler_view_item_action_edit"
+        android:orderInCategory="100"
+        android:title="Edytuj" />
+
+    <item
+        android:id="@+id/home_recycler_view_item_action_delete"
+        android:orderInCategory="101"
+        android:title="Usuń"/>
+
+</menu>

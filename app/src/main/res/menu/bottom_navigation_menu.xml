@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/fragment_details"
+        android:icon="@drawable/ic_person"
+        android:title="Klient" />
+
+    <item
+        android:id="@+id/fragment_products"
+        android:icon="@drawable/ic_shopping_cart"
+        android:title="Produkty" />
+
+    <item
+        android:id="@+id/fragment_gallery"
+        android:icon="@drawable/ic_photo_library"
+        android:title="Galeria" />
+
+</menu>

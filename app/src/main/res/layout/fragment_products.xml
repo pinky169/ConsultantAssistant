@@ -1,0 +1,60 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ViewSwitcher
+            android:id="@+id/products_view_switcher"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inAnimation="@android:anim/slide_in_left"
+            android:measureAllChildren="false"
+            android:outAnimation="@android:anim/slide_out_right">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/products_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:padding="16dp"
+                tools:listitem="@layout/fragment_product_recycler_view_item" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/all_products_chip_group"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp"
+                android:visibility="gone"
+                app:singleSelection="false" />
+
+        </ViewSwitcher>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/products_empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:drawableTop="@drawable/ic_add_shopping_cart_50dp"
+        android:padding="50dp"
+        android:text="@string/section_products_empty_view_text"
+        android:textAlignment="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

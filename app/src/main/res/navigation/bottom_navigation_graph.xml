@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/fragment_details">
+
+    <fragment
+        android:id="@+id/fragment_details"
+        android:name="pl.consultantassistant.ui.customer_details_activity.fragments.DetailsFragment"
+        tools:layout="@layout/fragment_details">
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_products"
+        android:name="pl.consultantassistant.ui.customer_details_activity.fragments.ProductsFragment"
+        tools:layout="@layout/fragment_products" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_gallery"
+        android:name="pl.consultantassistant.ui.customer_details_activity.fragments.GalleryFragment"
+        tools:layout="@layout/fragment_gallery"/>
+
+</navigation>
