@@ -1,4 +1,4 @@
-package pl.mymonat.activities.full_screen_photo_activity
+package pl.consultantassistant.ui.full_screen_photo_activity
 
 import android.net.Uri
 import android.os.Bundle

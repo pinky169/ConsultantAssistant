@@ -4,16 +4,16 @@
     <item
         android:id="@+id/fragment_details"
         android:icon="@drawable/ic_person"
-        android:title="Klient" />
+        android:title="@string/fragment_details_title" />
 
     <item
         android:id="@+id/fragment_products"
         android:icon="@drawable/ic_shopping_cart"
-        android:title="Produkty" />
+        android:title="@string/fragment_products_title" />
 
     <item
         android:id="@+id/fragment_gallery"
         android:icon="@drawable/ic_photo_library"
-        android:title="Galeria" />
+        android:title="@string/fragment_gallery_title" />
 
 </menu>

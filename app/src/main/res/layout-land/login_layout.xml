@@ -23,42 +23,22 @@
             android:padding="16dp"
             tools:context=".ui.auth.LoginActivity">
 
-            <TextView
-                android:id="@+id/login_welcome_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/login_welcome_text"
-                android:textAlignment="center"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/guideline"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.2" />
-
             <LinearLayout
                 android:id="@+id/left_side_login"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:descendantFocusability="beforeDescendants"
                 android:focusableInTouchMode="true"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/vertical_guideline"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline">
+                app:layout_constraintTop_toTopOf="@+id/login_welcome_text">
 
                 <TextView
                     android:id="@+id/textview_email_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:text="@string/email_label"
                     android:textStyle="bold" />
 
@@ -83,38 +63,50 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/password_hint"
-                    android:importantForAutofill=""
                     android:inputType="textPassword"
                     android:text="@={viewmodel.password}" />
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/login_welcome_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="@string/login_welcome_text"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/button_sign_in"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/vertical_guideline"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <Button
                 android:id="@+id/button_sign_in"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="32dp"
                 android:background="@color/colorPrimary"
                 android:onClick="@{(v) -> viewmodel.login(v)}"
                 android:padding="8dp"
                 android:text="@string/sign_in"
                 app:layout_constraintBottom_toTopOf="@+id/textview_sign_up"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/left_side_login" />
+                app:layout_constraintStart_toStartOf="@+id/login_welcome_text"
+                app:layout_constraintTop_toBottomOf="@+id/login_welcome_text" />
 
             <TextView
                 android:id="@+id/textview_sign_up"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:onClick="@{(v) -> viewmodel.goToSignUp(v)}"
                 android:text="@string/create_new_account_label"
                 android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/login_welcome_text"
                 app:layout_constraintTop_toBottomOf="@+id/button_sign_in" />
 
             <ProgressBar
@@ -126,6 +118,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/vertical_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

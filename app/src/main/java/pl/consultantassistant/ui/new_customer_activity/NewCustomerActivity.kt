@@ -1,4 +1,4 @@
-package pl.mymonat.activities.new_customer_activity
+package pl.consultantassistant.ui.new_customer_activity
 
 import android.app.Activity
 import android.content.Intent
@@ -10,8 +10,7 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.new_customer_layout.*
 import pl.consultantassistant.R
-import pl.mymonat.models.Customer
-
+import pl.consultantassistant.data.models.Customer
 
 class NewCustomerActivity : AppCompatActivity() {
 
@@ -65,14 +64,14 @@ class NewCustomerActivity : AppCompatActivity() {
             customerEmail = email_edit_text.text.toString().trim()
 
             if(customerName.isBlank() && customerSurname.isBlank()) {
-                name_edit_text.error = "Imię nie może być puste"
-                surname_edit_text.error = "Nazwisko nie może być puste"
+                name_edit_text.error = getString(R.string.name_input_error_message)
+                surname_edit_text.error = getString(R.string.surname_input_error_message)
             } else if (customerName.isBlank()) {
-                name_edit_text.error = "Imię nie może być puste"
+                name_edit_text.error = getString(R.string.name_input_error_message)
             } else if (customerSurname.isBlank()) {
-                surname_edit_text.error = "Nazwisko nie może być puste"
+                surname_edit_text.error = getString(R.string.surname_input_error_message)
             } else if(customerEmail.isNotBlank() && !isEmailValid(customerEmail)) {
-                email_edit_text.error = "Podany adres email ma zły format"
+                email_edit_text.error = getString(R.string.email_input_wrong_format_error_message)
             } else {
 
                 val resultIntent = Intent()
@@ -81,8 +80,10 @@ class NewCustomerActivity : AppCompatActivity() {
                 resultIntent.putExtra("email", customerEmail)
                 resultIntent.putExtra("userLevel", selectedUserLevel)
 
-                if (intent.hasExtra("customer")) {
+                if (intent.hasExtra("customer") && intent.hasExtra("position")) {
                     val customer = intent.getSerializableExtra("customer") as Customer
+                    val position = intent.getIntExtra("position", -1)
+                    resultIntent.putExtra("changedPosition", position)
                     resultIntent.putExtra("customerID", customer.customerID)
                 }
 

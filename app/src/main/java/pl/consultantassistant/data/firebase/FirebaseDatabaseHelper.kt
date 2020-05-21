@@ -2,11 +2,7 @@ package pl.consultantassistant.data.firebase
 
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import pl.consultantassistant.data.models.Partner
-import pl.mymonat.models.Customer
-import pl.mymonat.models.CustomerDetails
-import pl.mymonat.models.Photo
-import pl.mymonat.models.Product
+import pl.consultantassistant.data.models.*
 
 class FirebaseDatabaseHelper {
 

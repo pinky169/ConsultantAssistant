@@ -1,4 +1,4 @@
-package pl.mymonat.models
+package pl.consultantassistant.data.models
 
 import java.io.Serializable
 

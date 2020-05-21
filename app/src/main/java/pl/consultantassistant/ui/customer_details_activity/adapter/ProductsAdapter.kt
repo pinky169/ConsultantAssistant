@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_product_recycler_view_item.view.*
 import pl.consultantassistant.R
-import pl.mymonat.models.Product
+import pl.consultantassistant.data.models.Product
 
 class ProductsAdapter: ListAdapter<Product, ProductsAdapter.ViewHolder>(diffCallback) {
 

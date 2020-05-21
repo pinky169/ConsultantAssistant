@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.gallery_item_layout.view.*
 import pl.consultantassistant.R
+import pl.consultantassistant.data.models.Photo
 import pl.consultantassistant.utils.GalleryItemListener
-import pl.mymonat.models.Photo
 
 class PhotosAdapter : ListAdapter<Photo, PhotosAdapter.ViewHolder>(diffCallback) {
 

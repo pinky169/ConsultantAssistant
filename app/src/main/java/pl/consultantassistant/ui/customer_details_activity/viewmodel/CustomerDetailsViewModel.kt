@@ -6,10 +6,10 @@ import com.google.firebase.database.DataSnapshot
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pl.consultantassistant.data.firebase.FirebaseQueryLiveData
+import pl.consultantassistant.data.models.CustomerDetails
+import pl.consultantassistant.data.models.Photo
+import pl.consultantassistant.data.models.Product
 import pl.consultantassistant.data.repository.Repository
-import pl.mymonat.models.CustomerDetails
-import pl.mymonat.models.Photo
-import pl.mymonat.models.Product
 
 
 class CustomerDetailsViewModel(application: Application, private val repository: Repository) : AndroidViewModel(application) {
@@ -94,6 +94,10 @@ class CustomerDetailsViewModel(application: Application, private val repository:
 
     fun insertProduct(partnerID: String, product: Product) = viewModelScope.launch(Dispatchers.IO) {
         repository.insertProduct(partnerID, product)
+    }
+
+    fun updateProduct(partnerID: String, product: Product) = viewModelScope.launch(Dispatchers.IO) {
+        repository.updateProduct(partnerID, product)
     }
 
     fun deleteCustomerProduct(partnerID: String, product: Product) = viewModelScope.launch(Dispatchers.IO) {

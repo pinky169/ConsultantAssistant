@@ -1,4 +1,4 @@
-package pl.mymonat.models
+package pl.consultantassistant.data.models
 
 class Product(var customerID: String = "", var productID: String = "", var productName: String = "") {
 

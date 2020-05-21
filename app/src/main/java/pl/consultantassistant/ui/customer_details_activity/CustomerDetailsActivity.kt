@@ -1,4 +1,4 @@
-package pl.mymonat.activities.customer_details_activity
+package pl.consultantassistant.ui.customer_details_activity
 
 import android.os.Bundle
 import android.view.View
@@ -13,10 +13,10 @@ import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 import pl.consultantassistant.R
 import pl.consultantassistant.data.firebase.FirebaseQueryLiveData
+import pl.consultantassistant.data.models.Customer
 import pl.consultantassistant.ui.customer_details_activity.viewmodel.CustomerDetailsViewModel
 import pl.consultantassistant.ui.customer_details_activity.viewmodel.CustomerDetailsViewModelFactory
 import pl.consultantassistant.utils.LoadingListener
-import pl.mymonat.models.Customer
 import androidx.navigation.ui.AppBarConfiguration as AppBarConfiguration1
 
 

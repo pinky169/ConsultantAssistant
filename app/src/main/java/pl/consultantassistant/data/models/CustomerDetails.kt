@@ -1,4 +1,4 @@
-package pl.mymonat.models
+package pl.consultantassistant.data.models
 
 data class CustomerDetails(
     var customerID: String = "",

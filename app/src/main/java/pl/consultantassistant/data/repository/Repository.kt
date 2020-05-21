@@ -3,11 +3,7 @@ package pl.consultantassistant.data.repository
 import pl.consultantassistant.data.firebase.FirebaseAuthHelper
 import pl.consultantassistant.data.firebase.FirebaseDatabaseHelper
 import pl.consultantassistant.data.firebase.FirebaseStorageHelper
-import pl.consultantassistant.data.models.Partner
-import pl.mymonat.models.Customer
-import pl.mymonat.models.CustomerDetails
-import pl.mymonat.models.Photo
-import pl.mymonat.models.Product
+import pl.consultantassistant.data.models.*
 
 class Repository(private val firebase: FirebaseAuthHelper, private val firebaseDB: FirebaseDatabaseHelper, private val storage: FirebaseStorageHelper) {
 
@@ -73,6 +69,9 @@ class Repository(private val firebase: FirebaseAuthHelper, private val firebaseD
     fun getCustomerProductsReference(uid: String, customerID: String) = firebaseDB.getSpecificCustomerProductsReference(uid, customerID)
 
     fun insertProduct(uid: String, product: Product) = firebaseDB.insertCustomerProduct(uid, product)
+
+    fun updateProduct(uid: String, product: Product) =
+        firebaseDB.updateCustomerProduct(uid, product)
 
     fun deleteCustomerProduct(uid: String, product: Product) = firebaseDB.deleteCustomerProduct(uid, product)
 

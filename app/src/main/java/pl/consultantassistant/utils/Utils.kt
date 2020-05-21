@@ -6,12 +6,12 @@ import android.view.View
 import android.widget.Toast
 import es.dmoral.toasty.Toasty
 import pl.consultantassistant.R
+import pl.consultantassistant.data.models.Customer
+import pl.consultantassistant.data.models.Photo
 import pl.consultantassistant.ui.auth.LoginActivity
 import pl.consultantassistant.ui.auth.SignUpActivity
+import pl.consultantassistant.ui.full_screen_photo_activity.FullScreenPhotoActivity
 import pl.consultantassistant.ui.home.HomeActivity
-import pl.mymonat.activities.full_screen_photo_activity.FullScreenPhotoActivity
-import pl.mymonat.models.Customer
-import pl.mymonat.models.Photo
 
 fun Context.startHomeActivity() =
     Intent(this, HomeActivity::class.java).also {
@@ -40,7 +40,7 @@ fun Context.startFullScreenPhotoActivity(photoURL: String) =
     }
 
 interface CustomerItemListener {
-    fun createPopupMenu(view: View, customer: Customer)
+    fun createPopupMenu(view: View, position: Int, customer: Customer)
     fun onItemClicked(customer: Customer)
 }
 

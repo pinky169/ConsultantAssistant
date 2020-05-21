@@ -11,8 +11,8 @@ import kotlinx.android.synthetic.main.customer_details_editable_item_layout.*
 import kotlinx.android.synthetic.main.customer_details_item_layout.*
 import kotlinx.android.synthetic.main.fragment_details.*
 import pl.consultantassistant.R
+import pl.consultantassistant.data.models.CustomerDetails
 import pl.consultantassistant.ui.customer_details_activity.viewmodel.CustomerDetailsViewModel
-import pl.mymonat.models.CustomerDetails
 
 class DetailsFragment : Fragment() {
 
@@ -141,6 +141,7 @@ class DetailsFragment : Fragment() {
                 menuButton.setIcon(R.drawable.ic_save)
             }
             EDITING_STATE_DISABLED -> {
+                menuButton.isVisible = true
                 menuButton.setIcon(R.drawable.ic_edit)
             }
             EDITING_STATE_DISABLED_WHEN_VIEW_EMPTY -> {

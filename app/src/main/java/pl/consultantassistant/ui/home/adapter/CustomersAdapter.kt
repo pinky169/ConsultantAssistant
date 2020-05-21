@@ -3,17 +3,23 @@ package pl.consultantassistant.ui.home.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.customer_item_layout.view.*
 import pl.consultantassistant.R
+import pl.consultantassistant.data.models.Customer
 import pl.consultantassistant.utils.CustomerItemListener
-import pl.mymonat.models.Customer
+import java.util.*
 
-class CustomersAdapter : ListAdapter<Customer, CustomersAdapter.ViewHolder>(diffCallback) {
+class CustomersAdapter : ListAdapter<Customer, CustomersAdapter.ViewHolder>(diffCallback),
+    Filterable {
 
     var itemListener: CustomerItemListener? = null
+    var originalList: List<Customer>? = null
+    var filteredList: List<Customer> = mutableListOf()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -24,13 +30,19 @@ class CustomersAdapter : ListAdapter<Customer, CustomersAdapter.ViewHolder>(diff
         private val popupMenu = itemView.popup_menu
         private val userLevelArray = itemContext.resources.getStringArray(R.array.user_levels_array)
 
-        fun bind(customer: Customer) {
+        fun bind(position: Int, customer: Customer) {
             fullName.text = itemContext.getString(R.string.full_name, customer.name, customer.surname)
             userLevel.text = customer.userLevel
             loadIcon(customer)
 
             itemView.setOnClickListener { itemListener?.onItemClicked(customer) }
-            popupMenu.setOnClickListener { itemListener?.createPopupMenu(popupMenu, customer) }
+            popupMenu.setOnClickListener {
+                itemListener?.createPopupMenu(
+                    popupMenu,
+                    position,
+                    customer
+                )
+            }
         }
 
         private fun loadIcon(customer: Customer) {
@@ -51,7 +63,47 @@ class CustomersAdapter : ListAdapter<Customer, CustomersAdapter.ViewHolder>(diff
         return ViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(getItem(position))
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
+        holder.bind(position, getItem(position))
+
+    override fun getFilter(): Filter? {
+        return object : Filter() {
+            override fun performFiltering(charSequence: CharSequence): FilterResults {
+                val charString = charSequence.toString().trim()
+                if (charString.isEmpty()) {
+                    filteredList = originalList!!
+                } else {
+
+                    originalList?.let { originalList ->
+
+                        val filterResults: ArrayList<Customer> = arrayListOf()
+                        for (customer in originalList) {
+
+                            if (customer.name.toLowerCase(Locale.getDefault())
+                                    .contains(charString.toLowerCase(Locale.getDefault())) ||
+                                customer.surname.toLowerCase(Locale.getDefault())
+                                    .contains(charString.toLowerCase(Locale.getDefault())) ||
+                                customer.userLevel.toLowerCase(Locale.getDefault())
+                                    .contains(charString.toLowerCase(Locale.getDefault()))
+                            ) {
+                                filterResults.add(customer)
+                            }
+                        }
+                        filteredList = filterResults
+                    }
+                }
+
+                val results = FilterResults()
+                results.values = filteredList
+                return results
+            }
+
+            override fun publishResults(charSequence: CharSequence, filterResults: FilterResults) {
+                filteredList = filterResults.values as List<Customer>
+                submitList(filteredList)
+            }
+        }
+    }
 
     companion object {
 

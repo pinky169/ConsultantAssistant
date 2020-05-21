@@ -1,4 +1,4 @@
-package pl.mymonat.models
+package pl.consultantassistant.data.models
 
 class Photo(var customerID: String = "", var photoID: String = "", var photoURL: String = "", var photoExtension: String = "") {
 

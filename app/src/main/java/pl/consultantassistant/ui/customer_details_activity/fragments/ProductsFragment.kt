@@ -1,5 +1,7 @@
 package pl.consultantassistant.ui.customer_details_activity.fragments
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import androidx.core.view.children
@@ -8,16 +10,18 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import kotlinx.android.synthetic.main.fragment_products.*
 import pl.consultantassistant.R
+import pl.consultantassistant.data.models.Product
 import pl.consultantassistant.ui.customer_details_activity.adapter.ProductsAdapter
 import pl.consultantassistant.ui.customer_details_activity.fragments.DetailsFragment.Companion.EDITING_STATE_DISABLED
 import pl.consultantassistant.ui.customer_details_activity.fragments.DetailsFragment.Companion.EDITING_STATE_DISABLED_WHEN_VIEW_EMPTY
 import pl.consultantassistant.ui.customer_details_activity.fragments.DetailsFragment.Companion.EDITING_STATE_ENABLED
 import pl.consultantassistant.ui.customer_details_activity.viewmodel.CustomerDetailsViewModel
-import pl.mymonat.models.Product
+import java.util.*
 
-class ProductsFragment() : Fragment() {
+class ProductsFragment : Fragment() {
 
     // ViewModel
     private lateinit var viewModel: CustomerDetailsViewModel
@@ -36,7 +40,7 @@ class ProductsFragment() : Fragment() {
     private var editingState: String = ""
 
     // Array of strings with names od products
-    private var allProductsArray: Array<String> = arrayOf()
+    private var allProductsArray: List<Array<String>> = emptyList()
 
     // ArrayList with current products
     // used to select those products in chip group
@@ -64,6 +68,7 @@ class ProductsFragment() : Fragment() {
 
         setupListeners()
         setupRecyclerView()
+        getAllPossibleProducts()
         loadAllPossibleProducts()
 
         viewModel = ViewModelProvider(requireActivity()).get(CustomerDetailsViewModel::class.java)
@@ -90,20 +95,28 @@ class ProductsFragment() : Fragment() {
 
     private fun loadAllPossibleProducts() {
 
-        allProductsArray = requireActivity().resources.getStringArray(R.array.product_list)
+        for (productsArray in allProductsArray) {
 
-        for (product in allProductsArray) {
-            val chip = Chip(requireContext())
-            chip.text = product
-            chip.isCheckable = true
-            chip.setOnCheckedChangeListener { button, isChecked ->
-                if (isChecked) {
-                    productsToSubmit.add(button.text.toString())
-                } else {
-                    productsToSubmit.remove(button.text.toString())
+            val chipGroup = ChipGroup(requireContext())
+            val color: Int = generateRandomColor()
+
+            for (product in productsArray) {
+                val chip = Chip(requireContext())
+                chip.text = product
+                chip.chipBackgroundColor = ColorStateList.valueOf(color)
+                chip.isCheckable = true
+                chip.setOnCheckedChangeListener { button, isChecked ->
+                    if (isChecked) {
+                        productsToSubmit.add(button.text.toString())
+                    } else {
+                        productsToSubmit.remove(button.text.toString())
+                    }
                 }
+
+                chipGroup.addView(chip)
             }
-            all_products_chip_group.addView(chip)
+
+            all_products_view.addView(chipGroup)
         }
     }
 
@@ -143,6 +156,7 @@ class ProductsFragment() : Fragment() {
                 menuButton.setIcon(R.drawable.ic_save)
             }
             EDITING_STATE_DISABLED -> {
+                menuButton.isVisible = true
                 menuButton.setIcon(R.drawable.ic_edit)
             }
             EDITING_STATE_DISABLED_WHEN_VIEW_EMPTY -> {
@@ -152,19 +166,25 @@ class ProductsFragment() : Fragment() {
     }
 
     private fun switchProductsView() {
-        if (editingState == EDITING_STATE_DISABLED || editingState == EDITING_STATE_DISABLED_WHEN_VIEW_EMPTY) {
 
-            // Clear checks first
-            all_products_chip_group.clearCheck()
+        if (editingState == EDITING_STATE_DISABLED || editingState == EDITING_STATE_DISABLED_WHEN_VIEW_EMPTY) {
 
             // Select all customer products when opening the chip group
             // so the partner knows which products were selected previously
-            for (chip in all_products_chip_group.children) {
-                val currentChip = chip as Chip
-                val currentChipId = currentChip.id
-                for (customerProduct in currentProducts) {
-                    if (currentChip.text.toString() == customerProduct.productName) {
-                        all_products_chip_group.check(currentChipId)
+            for (child in all_products_view.children) {
+
+                val chipGroup = child as ChipGroup
+                chipGroup.clearCheck()
+
+                for (chip in chipGroup.children) {
+
+                    val currentChip = chip as Chip
+                    val currentChipId = currentChip.id
+
+                    for (customerProduct in currentProducts) {
+                        if (currentChip.text.toString() == customerProduct.productName) {
+                            chipGroup.check(currentChipId)
+                        }
                     }
                 }
             }
@@ -199,5 +219,52 @@ class ProductsFragment() : Fragment() {
 
     private fun setupListeners() {
         products_empty_view.setOnClickListener { switchProductsView() }
+    }
+
+    private fun getAllPossibleProducts(): List<Array<String>> {
+
+        val groupOne = requireActivity().resources.getStringArray(R.array.products_section_one)
+        val groupTwo = requireActivity().resources.getStringArray(R.array.products_section_two)
+        val groupThree = requireActivity().resources.getStringArray(R.array.products_section_three)
+        val groupFour = requireActivity().resources.getStringArray(R.array.products_section_four)
+        val groupFive = requireActivity().resources.getStringArray(R.array.products_section_five)
+        val groupSix = requireActivity().resources.getStringArray(R.array.products_section_six)
+        val groupSeven = requireActivity().resources.getStringArray(R.array.products_section_seven)
+        val groupEight = requireActivity().resources.getStringArray(R.array.products_section_eight)
+        val groupNine = requireActivity().resources.getStringArray(R.array.products_section_nine)
+        val groupTen = requireActivity().resources.getStringArray(R.array.products_section_ten)
+
+        allProductsArray = listOf(
+            groupOne,
+            groupTwo,
+            groupThree,
+            groupFour,
+            groupFive,
+            groupSix,
+            groupSeven,
+            groupEight,
+            groupNine,
+            groupTen
+        )
+
+        return allProductsArray
+    }
+
+    private fun generateRandomColor(): Int {
+
+        val random = Random()
+
+        // This is the base color which will be mixed with the generated one
+        val baseColor = Color.WHITE
+
+        val baseRed = Color.red(baseColor)
+        val baseGreen = Color.green(baseColor)
+        val baseBlue = Color.blue(baseColor)
+
+        val red: Int = (baseRed + random.nextInt(256)) / 2
+        val green: Int = (baseGreen + random.nextInt(256)) / 2
+        val blue: Int = (baseBlue + random.nextInt(256)) / 2
+
+        return Color.rgb(red, green, blue)
     }
 }

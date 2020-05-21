@@ -5,83 +5,90 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:padding="16dp"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:labelFor="@id/name_edit_text"
-            android:text="@string/name_edit_text_label_text"
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <EditText
-            android:id="@+id/name_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/name_edit_text_hint"
-            android:inputType="textPersonName|textCapSentences" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:labelFor="@id/name_edit_text"
+                android:text="@string/name_edit_text_label_text"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:labelFor="@id/surname_edit_text"
-            android:text="@string/surname_edit_text_label_text"
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />
+            <EditText
+                android:id="@+id/name_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/name_edit_text_hint"
+                android:inputType="textPersonName|textCapSentences" />
 
-        <EditText
-            android:id="@+id/surname_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/surname_edit_text_hint"
-            android:inputType="textPersonName|textCapSentences" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:labelFor="@id/surname_edit_text"
+                android:text="@string/surname_edit_text_label_text"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:labelFor="@id/name_edit_text"
-            android:text="@string/email_label_text"
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />
+            <EditText
+                android:id="@+id/surname_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/surname_edit_text_hint"
+                android:inputType="textPersonName|textCapSentences" />
 
-        <EditText
-            android:id="@+id/email_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/email_edit_text_hint"
-            android:inputType="textEmailAddress" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:labelFor="@id/name_edit_text"
+                android:text="@string/email_label_text"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:labelFor="@id/customer_level_spinner"
-            android:text="@string/customer_level_spinner_label_text"
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />
+            <EditText
+                android:id="@+id/email_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email_edit_text_hint"
+                android:inputType="textEmailAddress" />
 
-        <Spinner
-            android:id="@+id/customer_level_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:entries="@array/user_levels_array"
-            android:spinnerMode="dropdown"
-            tools:listitem="@layout/support_simple_spinner_dropdown_item" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:labelFor="@id/customer_level_spinner"
+                android:text="@string/customer_level_spinner_label_text"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
 
-    </LinearLayout>
+            <Spinner
+                android:id="@+id/customer_level_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:entries="@array/user_levels_array"
+                android:spinnerMode="dropdown"
+                tools:listitem="@layout/support_simple_spinner_dropdown_item" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_save"

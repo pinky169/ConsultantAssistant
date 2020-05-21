@@ -1,64 +1,5 @@
 <resources>
-    <string name="app_name">Asystent konsultanta</string>
-
-    <string name="email_label">Email</string>
-    <string name="password_label">Hasło</string>
-    <string name="email_hint">Podaj adres email</string>
-    <string name="password_hint">Podaj hasło</string>
-    <string name="sign_in">Zaloguj się</string>
-    <string name="sign_up">Zarejestruj się</string>
-    <string name="create_new_account_label">Nie masz jeszcze konta? Zarejestruj się <u>tutaj</u>.</string>
-    <string name="register_a_new_account_label">Zarejestruj\nnowe konto</string>
-    <string name="confirm_your_new_password">Potwierdź nowe hasło</string>
-    <string name="repeat_password">Powtórz hasło</string>
-    <string name="sign_up_title">Zarejestruj się</string>
-    <string name="welcome_message">Witaj! &#128521;</string>
-    <string name="already_have_an_account_label">Masz juz konto? Zaloguj się <u>tutaj</u>.</string>
-    <string name="this_user_already_exists_toast">Konto dla podanego adresu już istnieje</string>
-    <string name="log_out_confirmation">Pomyślnie wylogowano</string>
-    <string name="email_already_verified">Ten email został już zweryfikowany</string>
-    <string name="failed_to_send_verification_email">Nie udało się wysłać weryfikacji</string>
-    <string name="verification_send_to">Wysłano email na adres %1$s</string>
-    <string name="email_badly_formatted">Ten email ma zły format</string>
-    <string name="password_too_weak">Podane hasło jest za słabe (minimum 6 znaków)</string>
-    <string name="password_invalid_or_not_existing">Podane hasło jest nieprawidłowe</string>
-    <string name="passwords_dont_match">Hasła nie pasują do siebie</string>
-    <string name="field_can_not_be_empty">Pole nie może być puste</string>
-    <string name="account_successfully_registered">Konto zostało pomyślnie zarejestrowane</string>
-    <string name="user_not_found">Podane konto nie istnieje</string>
-    <string name="user_disabled">To konto zostało wyłączone</string>
-    <string name="no_internet_connection">Brak połączenia z internetem</string>
-    <string name="log_out">Wyloguj się</string>
-    <string name="full_name">%1$s %2$s</string>
-    <string name="menu_delete_person_text">Usuń %1$s %2$s</string>
-    <string name="menu_edit_person_text">Edytuj %1$s %2$s</string>
-    <string name="menu_delete_person_success_text">Pomyślnie usunięto %1$s %2$s</string>
-    <string name="hair_color">Kolor włosów</string>
-    <string name="dyed_hair">Włosy farbowane</string>
-    <string name="type_of_hair">Typ włosów</string>
-    <string name="wash_frequency">Częstotliwość mycia</string>
-    <string name="hair_condition">Ogólny stan włosów</string>
-    <string name="routine_activities">Rutynowe czynności</string>
-    <string name="termo_protection_needed">Potrzebna termoochrona</string>
-    <string name="purpose_of_the_treatment">Cel kuracji</string>
-    <string name="other_comments">Inne uwagi</string>
-    <string name="section_details_empty_view_text">Brak szczegółów o kliencie</string>
-    <string name="section_gallery_header_title">%1$s %2$s - galeria zdjęć</string>
-    <string name="section_gallery_empty_view_text">Dodaj zdjęcia z galerii zdjęć</string>
-    <string name="section_products_header_title">%1$s %2$s - produkty</string>
-    <string name="section_products_empty_view_text">Brak produktów</string>
-    <string name="name_edit_text_hint">Imię</string>
-    <string name="name_edit_text_label_text">Imię</string>
-    <string name="surname_edit_text_hint">Nazwisko</string>
-    <string name="surname_edit_text_label_text">Nazwisko</string>
-    <string name="customer_level_spinner_label_text">Poziom klienta</string>
-    <string name="customers_empty_view_text">Dodaj nowych klientów przyciskiem\nw prawym dolnym rogu</string>
-
-    <string name="notifications_channel_id">partner_assistant_channel_id</string>
-    <string name="customer_added_successfully_text">Pomyślnie dodano nowego klienta</string>
-    <string name="menu_search_title">Szukaj</string>
-    <string name="email_edit_text_hint">Adres email</string>
-    <string name="email_label_text">Email</string>
+    <string name="app_name">Asystent\nkonsultanta</string>
 
     <string-array name="user_levels_array">
         <item>VIP</item>
@@ -105,32 +46,135 @@
         <item>Kręcone lokówką</item>
     </string-array>
 
-
-    <string-array name="product_list">
-        <item>Szampon RENEW</item>
-        <item>Szampon REVIVE</item>
-        <item>Szampon INTENSE REPAIR</item>
-        <item>Szampon SMOOTHING</item>
-        <item>Szampon i odżywka BLACK 2 W 1</item>
-        <item>Szampon ADVANCED HYDRATING</item>
-        <item>Odżywka bez spłukiwania RESTORE</item>
-        <item>Odżywka REVITALIZE</item>
-        <item>Odżywka INTENSE REPAIR</item>
-        <item>Odżywka SMOOTHING</item>
-        <item>Odżywka ADVANCED HYDRATING</item>
-        <item>Maska REPLENISH</item>
-        <item>Maska SUPER MOISTURE</item>
-        <item>Maseczka HEAVENLY HYDRATING</item>
-        <item>Olejek REJUVENIQE</item>
-        <item>Krem naprawczy REJUVABEADS</item>
-        <item>Termoochrona - krem Blow out</item>
-        <item>Termoochrona - krem do stylizacji</item>
-        <item>Stylizacja - suchy szampon</item>
-        <item>Stylizacja - lakier do włosów</item>
-        <item>Serum do brwi i rzęs</item>
+    <string-array name="products_section_one">
+        <item>Intensywny olejek REJUVENIQE</item>
+        <item>REJUVENIQE LIGHT by Monat</item>
+        <item>REJUVABEADS</item>
+        <item>LASH &amp; BROW enhancing serum</item>
     </string-array>
 
+    <string-array name="products_section_two">
+        <item>Szampon RENEW</item>
+        <item>Maska REPLENISH</item>
+        <item>Odżywka bez spłukiwania RESTORE</item>
+    </string-array>
+
+    <string-array name="products_section_three">
+        <item>Szampon REVIVE</item>
+        <item>Odżywka REVITALIZE</item>
+        <item>Preparat RESHAPE unoszący włosy u nasady</item>
+    </string-array>
+
+    <string-array name="products_section_four">
+        <item>Szampon INTENSE REPAIR</item>
+        <item>Odżywka INTENSE REPAIR</item>
+        <item>Kuracja INTENSE REPAIR</item>
+    </string-array>
+
+    <string-array name="products_section_five">
+        <item>Szampon SMOOTHING</item>
+        <item>Odżywka SMOOTHING o głębokim działaniu</item>
+    </string-array>
+
+    <string-array name="products_section_six">
+        <item>Maska SUPER MOISTURE</item>
+    </string-array>
+
+    <string-array name="products_section_seven">
+        <item>Szampon ADVANCED HYDRATING</item>
+        <item>Odżywka ADVANCED HYDRATING</item>
+        <item>DOUBLE ACTION HYDRATING serum</item>
+        <item>Maseczka HEAVENLY HYDRATING</item>
+    </string-array>
+
+    <string-array name="products_section_eight">
+        <item>Odbudowująca odżywka PRZED MYCIEM WŁOSÓW</item>
+        <item>Szampon ODBUDOWUJĄCY</item>
+        <item>Maska REGENERACYJNO-NAPRAWCZA HAIR TRANSFORMATION</item>
+        <item>Serum odbudowujące INNER FORCE</item>
+    </string-array>
+
+    <string-array name="products_section_nine">
+        <item>Szampon i odżywka MONAT BLACK 2 W 1</item>
+    </string-array>
+
+    <string-array name="products_section_ten">
+        <item>Krem BLOW OUT</item>
+        <item>Spray do włosów REFINISH CONTROL</item>
+        <item>Suchy szampon z odżywką THE CHAMP</item>
+        <item>Termoochronny krem do stylizacji THERMAL PROTECT</item>
+    </string-array>
+
+    <string name="email_label">Email</string>
+    <string name="password_label">Hasło</string>
+    <string name="email_hint">Podaj adres email</string>
+    <string name="password_hint">Podaj hasło</string>
+    <string name="sign_in">Zaloguj się</string>
+    <string name="sign_up">Zarejestruj się</string>
+    <string name="create_new_account_label">Nie masz jeszcze konta? Zarejestruj się <u>tutaj</u>.</string>
+    <string name="register_a_new_account_label">Zarejestruj\nnowe konto</string>
+    <string name="confirm_your_new_password">Potwierdź nowe hasło</string>
+    <string name="repeat_password">Powtórz hasło</string>
+    <string name="sign_up_title">Zarejestruj się</string>
+    <string name="welcome_message">Witaj! &#128521;</string>
+    <string name="already_have_an_account_label">Masz juz konto? Zaloguj się <u>tutaj</u>.</string>
+    <string name="this_user_already_exists_toast">Konto dla podanego adresu już istnieje</string>
+    <string name="log_out_confirmation">Pomyślnie wylogowano</string>
+    <string name="email_already_verified">Ten email został już zweryfikowany</string>
+    <string name="failed_to_send_verification_email">Nie udało się wysłać weryfikacji</string>
+    <string name="verification_send_to">Wysłano email na adres %1$s</string>
+    <string name="email_badly_formatted">Ten email ma zły format</string>
+    <string name="password_too_weak">Podane hasło jest za słabe (minimum 6 znaków)</string>
+    <string name="password_invalid_or_not_existing">Podane hasło jest nieprawidłowe</string>
+    <string name="passwords_dont_match">Hasła nie pasują do siebie</string>
+    <string name="field_can_not_be_empty">Pole nie może być puste</string>
+    <string name="account_successfully_registered">Konto zostało pomyślnie zarejestrowane</string>
+    <string name="user_not_found">Podane konto nie istnieje</string>
+    <string name="user_disabled">To konto zostało wyłączone</string>
+    <string name="no_internet_connection">Brak połączenia z internetem</string>
+    <string name="log_out">Wyloguj się</string>
+    <string name="full_name">%1$s %2$s</string>
+    <string name="menu_delete_person_text">Usuń %1$s %2$s</string>
+    <string name="menu_edit_person_text">Edytuj %1$s %2$s</string>
+    <string name="menu_delete_person_success_text">Pomyślnie usunięto %1$s %2$s</string>
+    <string name="hair_color">Kolor włosów</string>
+    <string name="dyed_hair">Włosy farbowane</string>
+    <string name="type_of_hair">Typ włosów</string>
+    <string name="wash_frequency">Częstotliwość mycia</string>
+    <string name="hair_condition">Ogólny stan włosów</string>
+    <string name="routine_activities">Rutynowe czynności</string>
+    <string name="termo_protection_needed">Potrzebna termoochrona</string>
+    <string name="purpose_of_the_treatment">Cel kuracji</string>
+    <string name="other_comments">Inne uwagi</string>
+    <string name="section_details_empty_view_text">Brak szczegółów o kliencie</string>
+    <string name="section_gallery_header_title">%1$s %2$s - galeria</string>
+    <string name="section_gallery_empty_view_text">Dodaj zdjęcia z galerii zdjęć</string>
+    <string name="section_products_header_title">%1$s %2$s - produkty</string>
+    <string name="section_products_empty_view_text">Brak produktów</string>
+    <string name="name_edit_text_hint">Imię</string>
+    <string name="name_edit_text_label_text">Imię</string>
+    <string name="surname_edit_text_hint">Nazwisko</string>
+    <string name="surname_edit_text_label_text">Nazwisko</string>
+    <string name="customer_level_spinner_label_text">Poziom klienta</string>
+    <string name="customers_empty_view_text">Dodaj nowych klientów przyciskiem\nw prawym dolnym rogu</string>
+    <string name="customer_added_successfully_text">Pomyślnie dodano nowego klienta</string>
+    <string name="menu_search_title">Szukaj</string>
+    <string name="email_edit_text_hint">Adres email</string>
+    <string name="email_label_text">Email</string>
     <string name="menu_action_edit_title">Edytuj</string>
     <string name="menu_action_add_new_photo_title">Dodaj zdjęcie</string>
     <string name="toast_message_saved">Zapisano</string>
+    <string name="login_welcome_text">Zaloguj się\ndo asystenta</string>
+    <string name="notifications_channel_id">partner_assistant_channel_id</string>
+    <string name="home_recycler_view_item_action_edit_title">Edytuj</string>
+    <string name="home_recycler_view_item_action_delete">Usuń</string>
+    <string name="fragment_details_title">Klient</string>
+    <string name="fragment_products_title">Produkty</string>
+    <string name="fragment_gallery_title">Galeria</string>
+    <string name="gallery_menu_action_delete_title">Usuń</string>
+    <string name="intent_image_chooser_title">Wybierz zdjęcie</string>
+    <string name="name_input_error_message">Pole z imieniem nie może być puste</string>
+    <string name="surname_input_error_message">Pole z nazwiskiem nie może być puste</string>
+    <string name="email_input_wrong_format_error_message">Podany adres email ma zły format</string>
+
 </resources>

@@ -13,11 +13,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.fragment_gallery.*
 import pl.consultantassistant.R
+import pl.consultantassistant.data.models.Photo
 import pl.consultantassistant.ui.customer_details_activity.adapter.PhotosAdapter
 import pl.consultantassistant.ui.customer_details_activity.viewmodel.CustomerDetailsViewModel
 import pl.consultantassistant.utils.GalleryItemListener
 import pl.consultantassistant.utils.startFullScreenPhotoActivity
-import pl.mymonat.models.Photo
 
 class GalleryFragment : Fragment(), GalleryItemListener {
 
@@ -32,6 +32,9 @@ class GalleryFragment : Fragment(), GalleryItemListener {
 
     // ID of the selected customer
     private lateinit var customerID: String
+
+    // gallery state
+    private var isGalleryEmpty: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,7 +106,12 @@ class GalleryFragment : Fragment(), GalleryItemListener {
             it.type = "image/*"
             it.action = Intent.ACTION_GET_CONTENT
         }
-        startActivityForResult(Intent.createChooser(intent, "Wybierz zdjęcie"), PICK_IMAGE_REQUEST)
+        startActivityForResult(
+            Intent.createChooser(
+                intent,
+                getString(R.string.intent_image_chooser_title)
+            ), PICK_IMAGE_REQUEST
+        )
     }
 
     private fun getFileExtension(uri: Uri?): String? {
@@ -116,7 +124,7 @@ class GalleryFragment : Fragment(), GalleryItemListener {
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
 
-            gallery_progress_bar.visibility = View.VISIBLE
+            gallery_progress_bar?.visibility = View.VISIBLE
 
             val fileExtension = getFileExtension(data.data)!!
 
@@ -132,10 +140,10 @@ class GalleryFragment : Fragment(), GalleryItemListener {
                         val imgURL = it.toString()
                         val newPhoto = Photo(customerID, newPhotoKey, imgURL, fileExtension)
                         viewModel.insertPhoto(partnerID, newPhoto)
-                        gallery_progress_bar.visibility = View.GONE
+                        gallery_progress_bar?.visibility = View.GONE
                     }
                 }.addOnCanceledListener {
-                    gallery_progress_bar.visibility = View.GONE
+                    gallery_progress_bar?.visibility = View.GONE
                 }
         }
     }
@@ -145,13 +153,19 @@ class GalleryFragment : Fragment(), GalleryItemListener {
     }
 
     private fun showOrHidePhotos(photos: List<Photo>) {
+
         if (photos.isNotEmpty()) {
             gallery_recycler_view.visibility = View.VISIBLE
             gallery_empty_view.visibility = View.GONE
+            isGalleryEmpty = false
         } else {
             gallery_recycler_view.visibility = View.GONE
             gallery_empty_view.visibility = View.VISIBLE
+            isGalleryEmpty = true
         }
+
+        // Refresh menu depending on whether the list is empty or not
+        requireActivity().invalidateOptionsMenu()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -164,6 +178,19 @@ class GalleryFragment : Fragment(), GalleryItemListener {
             R.id.gallery_action_add_new_photo -> openFileChooser()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        val menuButton = menu.findItem(R.id.gallery_action_add_new_photo)
+        when (isGalleryEmpty) {
+            true -> {
+                menuButton.isVisible = false
+            }
+            false -> {
+                menuButton.isVisible = true
+            }
+        }
     }
 
     companion object {

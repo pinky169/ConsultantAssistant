@@ -26,16 +26,19 @@
         <activity
             android:name="pl.consultantassistant.ui.home.HomeActivity"
             android:launchMode="singleTop" />
-        <activity android:name="pl.mymonat.activities.full_screen_photo_activity.FullScreenPhotoActivity"
+        <activity
+            android:name="pl.consultantassistant.ui.full_screen_photo_activity.FullScreenPhotoActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="pl.mymonat.activities.new_customer_activity.NewCustomerActivity"
+        <activity
+            android:name=".ui.new_customer_activity.NewCustomerActivity"
             android:parentActivityName="pl.consultantassistant.ui.home.HomeActivity"/>
-        <activity android:name="pl.mymonat.activities.customer_details_activity.CustomerDetailsActivity"
+        <activity
+            android:name="pl.consultantassistant.ui.customer_details_activity.CustomerDetailsActivity"
             android:theme="@style/MaterialAppTheme"
             android:parentActivityName="pl.consultantassistant.ui.home.HomeActivity"/>
 
         <service
-            android:name="pl.patryk.myhairdresser.data.firebase.notifications.CloudMessagingService"
+            android:name=".data.firebase.notifications.CloudMessagingService"
             android:stopWithTask="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

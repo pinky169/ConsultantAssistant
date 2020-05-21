@@ -2,8 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/gallery_action_add_new_photo"
+    <item
+        android:id="@+id/gallery_action_add_new_photo"
         android:icon="@drawable/ic_add_a_photo"
+        android:visible="false"
         android:title="@string/menu_action_add_new_photo_title"
         app:showAsAction="ifRoom" />
 

@@ -2,7 +2,7 @@ package pl.consultantassistant.data.firebase
 
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import pl.mymonat.models.Photo
+import pl.consultantassistant.data.models.Photo
 
 class FirebaseStorageHelper {
 

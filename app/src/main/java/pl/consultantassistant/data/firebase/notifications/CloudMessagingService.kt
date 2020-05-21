@@ -1,4 +1,4 @@
-package pl.patryk.myhairdresser.data.firebase.notifications
+package pl.consultantassistant.data.firebase.notifications
 
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -37,7 +37,7 @@ class CloudMessagingService : FirebaseMessagingService() {
         showNotification(notificationTitle, notificationBody)
     }
 
-    fun showNotification(notificationTitle: String?, notificationBody: String?) {
+    private fun showNotification(notificationTitle: String?, notificationBody: String?) {
 
         val intent = Intent(this, LoginActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

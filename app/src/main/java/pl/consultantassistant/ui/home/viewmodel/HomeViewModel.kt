@@ -7,14 +7,13 @@ import com.google.firebase.database.DatabaseReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pl.consultantassistant.data.firebase.FirebaseQueryLiveData
+import pl.consultantassistant.data.models.Customer
 import pl.consultantassistant.data.models.Partner
 import pl.consultantassistant.data.repository.Repository
-import pl.mymonat.models.Customer
 
 class HomeViewModel(application: Application, private val repository: Repository) : AndroidViewModel(application) {
 
     val partnerID by lazy { repository.currentUserId() }
-    private val searchQuery = MutableLiveData("")
     private val partnerLiveData: LiveData<Partner>
     private val customersLiveData: LiveData<List<Customer>>
 
@@ -65,10 +64,6 @@ class HomeViewModel(application: Application, private val repository: Repository
         repository.deleteAllCustomerData(uid, customerID)
     }
 
-    fun search(query: String) {
-        searchQuery.value = query
-    }
-
     /**
      * Use to insert user's device token into database.
      */
@@ -87,12 +82,20 @@ class HomeViewModel(application: Application, private val repository: Repository
 
     inner class CustomersDeserializer : Function<DataSnapshot> {
         fun apply(dataSnapshot: DataSnapshot): List<Customer> {
-            val productsList = arrayListOf<Customer>()
+            val customersList = arrayListOf<Customer>()
             for (child in dataSnapshot.children) {
                 val currentCustomer = child.getValue(Customer::class.java)!!
-                productsList.add(currentCustomer)
+                customersList.add(currentCustomer)
             }
-            return productsList
+            return customersList
+        }
+    }
+
+    inner class QueryMediatorLiveData<A, B>(a: LiveData<A>, b: LiveData<B>) :
+        MediatorLiveData<Pair<A?, B?>>() {
+        init {
+            addSource(a) { value = it to b.value }
+            addSource(b) { value = a.value to it }
         }
     }
 }
