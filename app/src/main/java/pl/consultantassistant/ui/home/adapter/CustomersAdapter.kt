@@ -69,7 +69,10 @@ class CustomersAdapter : ListAdapter<Customer, CustomersAdapter.ViewHolder>(diff
     override fun getFilter(): Filter? {
         return object : Filter() {
             override fun performFiltering(charSequence: CharSequence): FilterResults {
-                val charString = charSequence.toString().trim()
+
+                val locale = Locale.getDefault()
+                val charString = charSequence.toString().toLowerCase(locale)
+
                 if (charString.isEmpty()) {
                     filteredList = originalList!!
                 } else {
@@ -79,12 +82,12 @@ class CustomersAdapter : ListAdapter<Customer, CustomersAdapter.ViewHolder>(diff
                         val filterResults: ArrayList<Customer> = arrayListOf()
                         for (customer in originalList) {
 
-                            if (customer.name.toLowerCase(Locale.getDefault())
-                                    .contains(charString.toLowerCase(Locale.getDefault())) ||
-                                customer.surname.toLowerCase(Locale.getDefault())
-                                    .contains(charString.toLowerCase(Locale.getDefault())) ||
-                                customer.userLevel.toLowerCase(Locale.getDefault())
-                                    .contains(charString.toLowerCase(Locale.getDefault()))
+                            if (customer.name.toLowerCase(locale).contains(charString) ||
+                                customer.surname.toLowerCase(locale).contains(charString) ||
+                                "${customer.name.toLowerCase(locale)} ${customer.surname.toLowerCase(
+                                    locale
+                                )}".contains(charString) ||
+                                customer.userLevel.toLowerCase(locale).contains(charString)
                             ) {
                                 filterResults.add(customer)
                             }

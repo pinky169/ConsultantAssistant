@@ -214,6 +214,7 @@ class HomeActivity : AppCompatActivity(), CustomerItemListener, LoadingListener,
 
         val searchItem: MenuItem = menu!!.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
+        searchView.maxWidth = Int.MAX_VALUE
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
