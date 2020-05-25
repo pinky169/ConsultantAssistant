@@ -1,5 +1,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -30,8 +31,8 @@
         android:id="@+id/details_empty_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:drawableTop="@drawable/ic_new_folder_50dp"
+        android:gravity="center"
         android:padding="30dp"
         android:text="@string/section_details_empty_view_text"
         android:textAlignment="center"

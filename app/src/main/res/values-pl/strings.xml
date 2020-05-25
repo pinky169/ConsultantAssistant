@@ -176,5 +176,7 @@
     <string name="name_input_error_message">Pole z imieniem nie może być puste</string>
     <string name="surname_input_error_message">Pole z nazwiskiem nie może być puste</string>
     <string name="email_input_wrong_format_error_message">Podany adres email ma zły format</string>
+    <string name="image_upload_success_toast_message">Pomyślnie przesłano zdjęcie</string>
+    <string name="image_upload_error_toast_message">Przesyłanie zdjęcia nie powiodło się</string>
 
 </resources>

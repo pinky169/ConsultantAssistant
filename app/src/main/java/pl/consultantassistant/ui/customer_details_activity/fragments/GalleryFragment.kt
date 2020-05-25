@@ -6,11 +6,13 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.webkit.MimeTypeMap
+import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.fragment_gallery.*
 import pl.consultantassistant.R
 import pl.consultantassistant.data.models.Photo
@@ -105,6 +107,7 @@ class GalleryFragment : Fragment(), GalleryItemListener {
         val intent = Intent().also {
             it.type = "image/*"
             it.action = Intent.ACTION_GET_CONTENT
+            it.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
         }
         startActivityForResult(
             Intent.createChooser(
@@ -119,32 +122,68 @@ class GalleryFragment : Fragment(), GalleryItemListener {
         return mime.getExtensionFromMimeType(requireActivity().contentResolver.getType(uri!!))
     }
 
+    private fun uploadPhotoAndStoreInDatabase(imageUri: Uri) {
+
+        val fileExtension = getFileExtension(imageUri)!!
+
+        val newPhotoReference = viewModel.getCustomerPhotosReference(partnerID, customerID).push()
+        val newPhotoKey = newPhotoReference.key!!
+
+        val imageReference = viewModel.getCustomerStorageReference(partnerID, customerID)
+            .child("$newPhotoKey.$fileExtension")
+
+        imageReference
+            .putFile(imageUri)
+            .addOnSuccessListener {
+
+                imageReference.downloadUrl.addOnSuccessListener {
+                    val imgURL = it.toString()
+                    val newPhoto = Photo(customerID, newPhotoKey, imgURL, fileExtension)
+                    viewModel.insertPhoto(partnerID, newPhoto)
+                    gallery_progress_bar?.visibility = View.GONE
+                }
+
+                context?.let {
+                    Toasty.success(
+                        it,
+                        getString(R.string.image_upload_success_toast_message),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+            }
+            .addOnCanceledListener {
+                gallery_progress_bar?.visibility = View.GONE
+                context?.let {
+                    Toasty.error(
+                        it,
+                        getString(R.string.image_upload_error_toast_message),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
 
             gallery_progress_bar?.visibility = View.VISIBLE
 
-            val fileExtension = getFileExtension(data.data)!!
+            // Handle Multiple images
+            if (data.clipData != null) {
 
-            val newPhotoReference = viewModel.getCustomerPhotosReference(partnerID, customerID).push()
-            val newPhotoKey = newPhotoReference.key!!
+                val numberOfSelectedPhotos = data.clipData!!.itemCount
 
-            val imageReference = viewModel.getCustomerStorageReference(partnerID, customerID).child("$newPhotoKey.$fileExtension")
-
-            imageReference
-                .putFile(data.data!!)
-                .addOnSuccessListener {
-                    imageReference.downloadUrl.addOnSuccessListener {
-                        val imgURL = it.toString()
-                        val newPhoto = Photo(customerID, newPhotoKey, imgURL, fileExtension)
-                        viewModel.insertPhoto(partnerID, newPhoto)
-                        gallery_progress_bar?.visibility = View.GONE
-                    }
-                }.addOnCanceledListener {
-                    gallery_progress_bar?.visibility = View.GONE
+                for (i in 0 until numberOfSelectedPhotos) {
+                    uploadPhotoAndStoreInDatabase(data.clipData!!.getItemAt(i).uri)
                 }
+            }
+            // Handle single image
+            else if (data.data != null) {
+                uploadPhotoAndStoreInDatabase(data.data!!)
+            }
         }
     }
 

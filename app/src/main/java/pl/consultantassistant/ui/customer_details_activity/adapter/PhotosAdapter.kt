@@ -31,6 +31,8 @@ class PhotosAdapter : ListAdapter<Photo, PhotosAdapter.ViewHolder>(diffCallback)
 
         fun bind(photo: Photo) {
 
+            progressBar.visibility = View.VISIBLE
+
             Glide.with(itemContext)
                 .load(Uri.parse(photo.photoURL))
                 .listener(object : RequestListener<Drawable> {

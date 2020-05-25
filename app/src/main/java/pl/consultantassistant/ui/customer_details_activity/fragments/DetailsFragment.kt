@@ -85,6 +85,7 @@ class DetailsFragment : Fragment() {
     }
 
     private fun switchCustomerDetailsView() {
+
         if (detailsEditingState == EDITING_STATE_DISABLED || detailsEditingState == EDITING_STATE_DISABLED_WHEN_VIEW_EMPTY) {
             details_view_switcher.visibility = View.VISIBLE
             details_empty_view.visibility = View.GONE
@@ -95,6 +96,7 @@ class DetailsFragment : Fragment() {
             saveDetails()
             detailsEditingState = EDITING_STATE_DISABLED
         }
+
         requireActivity().invalidateOptionsMenu()
     }
 
@@ -155,6 +157,13 @@ class DetailsFragment : Fragment() {
             R.id.details_action_edit -> switchCustomerDetailsView()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        detailsEditingState = EDITING_STATE_DISABLED
+        requireActivity().invalidateOptionsMenu()
+        details_view_switcher.displayedChild = 0
     }
 
     companion object {

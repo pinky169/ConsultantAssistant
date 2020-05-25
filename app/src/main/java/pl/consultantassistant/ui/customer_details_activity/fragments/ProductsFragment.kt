@@ -37,7 +37,7 @@ class ProductsFragment : Fragment() {
 
     // State with information if editing
     // the list of customer products is enabled or not
-    private var editingState: String = ""
+    private var editingState: String = EDITING_STATE_DISABLED
 
     // Array of strings with names od products
     private var allProductsArray: List<Array<String>> = emptyList()
@@ -121,12 +121,13 @@ class ProductsFragment : Fragment() {
     }
 
     private fun showOrHideProducts(products: List<Product>) {
+
         if (products.isNotEmpty()) {
-            products_recycler_view.visibility = View.VISIBLE
+            products_view_switcher.visibility = View.VISIBLE
             products_empty_view.visibility = View.GONE
             editingState = EDITING_STATE_DISABLED
         } else {
-            products_recycler_view.visibility = View.GONE
+            products_view_switcher.visibility = View.GONE
             products_empty_view.visibility = View.VISIBLE
             editingState = EDITING_STATE_DISABLED_WHEN_VIEW_EMPTY
         }
@@ -190,6 +191,7 @@ class ProductsFragment : Fragment() {
             }
 
             products_empty_view.visibility = View.GONE
+            products_view_switcher.visibility = View.VISIBLE
             products_view_switcher.showNext()
             editingState = EDITING_STATE_ENABLED
 
@@ -266,5 +268,12 @@ class ProductsFragment : Fragment() {
         val blue: Int = (baseBlue + random.nextInt(256)) / 2
 
         return Color.rgb(red, green, blue)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        editingState = EDITING_STATE_DISABLED
+        requireActivity().invalidateOptionsMenu()
+        products_view_switcher.displayedChild = 0
     }
 }

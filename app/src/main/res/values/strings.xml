@@ -176,5 +176,7 @@
     <string name="name_input_error_message">The name field cannot be empty</string>
     <string name="surname_input_error_message">The surname field cannot be empty</string>
     <string name="email_input_wrong_format_error_message">The email adress has the wrong format</string>
+    <string name="image_upload_success_toast_message">Photo has been successfully uploaded</string>
+    <string name="image_upload_error_toast_message">Photo upload failed</string>
 
 </resources>
