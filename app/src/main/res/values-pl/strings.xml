@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Asystent\nkonsultanta</string>
+    <string name="app_name">Asystent Konsultanta</string>
 
     <string-array name="user_levels_array">
         <item>VIP</item>
@@ -12,8 +12,10 @@
     <string-array name="hair_colors">
         <item>Blond</item>
         <item>Platyna</item>
-        <item>Szatynka</item>
-        <item>Brunetka</item>
+        <item>Szatyn/-ka</item>
+        <item>Brunet/-ka</item>
+        <item>Rude</item>
+        <item>Siwe</item>
     </string-array>
 
     <string-array name="yes_no_array">
@@ -178,5 +180,6 @@
     <string name="email_input_wrong_format_error_message">Podany adres email ma zły format</string>
     <string name="image_upload_success_toast_message">Pomyślnie przesłano zdjęcie</string>
     <string name="image_upload_error_toast_message">Przesyłanie zdjęcia nie powiodło się</string>
+    <string name="menu_notification_title">Dodaj przypomnienie</string>
 
 </resources>

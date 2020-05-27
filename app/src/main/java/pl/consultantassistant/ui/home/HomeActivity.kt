@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.provider.CalendarContract.Events
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -30,6 +31,7 @@ import pl.consultantassistant.ui.new_customer_activity.NewCustomerActivity
 import pl.consultantassistant.utils.CustomerItemListener
 import pl.consultantassistant.utils.LoadingListener
 import pl.consultantassistant.utils.startLoginActivity
+
 
 class HomeActivity : AppCompatActivity(), CustomerItemListener, LoadingListener, KodeinAware {
 
@@ -243,9 +245,21 @@ class HomeActivity : AppCompatActivity(), CustomerItemListener, LoadingListener,
                     .show()
             }
 
+            R.id.menu_notification -> {
+                openCalendarNewEvent()
+            }
         }
 
         return true
+    }
+
+    private fun openCalendarNewEvent() {
+
+        val intent = Intent(Intent.ACTION_INSERT)
+            .setData(Events.CONTENT_URI)
+            .putExtra(Events.AVAILABILITY, Events.AVAILABILITY_BUSY)
+
+        startActivity(intent)
     }
 
     override fun onStarted() {

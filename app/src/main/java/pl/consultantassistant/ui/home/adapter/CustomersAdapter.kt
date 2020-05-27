@@ -31,6 +31,7 @@ class CustomersAdapter : ListAdapter<Customer, CustomersAdapter.ViewHolder>(diff
         private val userLevelArray = itemContext.resources.getStringArray(R.array.user_levels_array)
 
         fun bind(position: Int, customer: Customer) {
+
             fullName.text = itemContext.getString(R.string.full_name, customer.name, customer.surname)
             userLevel.text = customer.userLevel
             loadIcon(customer)
@@ -52,14 +53,16 @@ class CustomersAdapter : ListAdapter<Customer, CustomersAdapter.ViewHolder>(diff
                 userLevelArray[2] -> { icon.setImageResource(R.drawable.ic_customer_interested) }
                 userLevelArray[3] -> { icon.setImageResource(R.drawable.ic_partner) }
                 userLevelArray[4] -> { icon.setImageResource(R.drawable.ic_interested_partner) }
+                else -> {
+                    icon.setImageResource(R.drawable.ic_person)
+                }
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.customer_item_layout, parent, false)
+        val itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.customer_item_layout, parent, false)
         return ViewHolder(itemView)
     }
 
@@ -82,12 +85,15 @@ class CustomersAdapter : ListAdapter<Customer, CustomersAdapter.ViewHolder>(diff
                         val filterResults: ArrayList<Customer> = arrayListOf()
                         for (customer in originalList) {
 
-                            if (customer.name.toLowerCase(locale).contains(charString) ||
-                                customer.surname.toLowerCase(locale).contains(charString) ||
-                                "${customer.name.toLowerCase(locale)} ${customer.surname.toLowerCase(
-                                    locale
-                                )}".contains(charString) ||
-                                customer.userLevel.toLowerCase(locale).contains(charString)
+                            val name = customer.name.toLowerCase(locale)
+                            val surname = customer.surname.toLowerCase(locale)
+                            val fullName = "$name $surname"
+                            val userLevel = customer.userLevel.toLowerCase(locale)
+
+                            if (name.contains(charString) ||
+                                surname.contains(charString) ||
+                                fullName.contains(charString) ||
+                                userLevel.contains(charString)
                             ) {
                                 filterResults.add(customer)
                             }
