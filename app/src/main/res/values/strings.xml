@@ -181,5 +181,8 @@
     <string name="image_upload_success_toast_message">Photo has been successfully uploaded</string>
     <string name="image_upload_error_toast_message">Photo upload failed</string>
     <string name="menu_notification_title">Add a reminder</string>
+    <string name="purchase_successful_text">The subscription has been activated. You can log in or create an account</string>
+    <string name="purchase_pending_text">Purchase pending</string>
+    <string name="purchase_unspecified_state_text">Something went wrong</string>
 
 </resources>

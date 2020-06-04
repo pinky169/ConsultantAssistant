@@ -181,5 +181,8 @@
     <string name="image_upload_success_toast_message">Pomyślnie przesłano zdjęcie</string>
     <string name="image_upload_error_toast_message">Przesyłanie zdjęcia nie powiodło się</string>
     <string name="menu_notification_title">Dodaj przypomnienie</string>
+    <string name="purchase_successful_text">Subskrypcja została aktywowana. Możesz się zalogować lub utworzyć konto</string>
+    <string name="purchase_pending_text">Zakup w toku</string>
+    <string name="purchase_unspecified_state_text">Coś poszło nie tak</string>
 
 </resources>
