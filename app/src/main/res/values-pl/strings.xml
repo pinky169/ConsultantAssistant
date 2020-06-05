@@ -183,6 +183,7 @@
     <string name="menu_notification_title">Dodaj przypomnienie</string>
     <string name="purchase_successful_text">Subskrypcja została aktywowana. Możesz się zalogować lub utworzyć konto</string>
     <string name="purchase_pending_text">Zakup w toku</string>
-    <string name="purchase_unspecified_state_text">Coś poszło nie tak</string>
+    <string name="purchase_unspecified_state_text">Coś poszło nie tak. Spróbuj ponownie</string>
+    <string name="billing_subscription_not_active_toast">Aktywuj subskrypcję, aby uzyskać dostęp</string>
 
 </resources>

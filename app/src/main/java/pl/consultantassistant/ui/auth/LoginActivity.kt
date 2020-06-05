@@ -25,23 +25,25 @@ import pl.consultantassistant.utils.AuthListener
 import pl.consultantassistant.utils.BillingUtils
 import pl.consultantassistant.utils.startHomeActivity
 
-class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware, BillingUtils.PurchaseHandler {
+class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware,
+    BillingUtils.PurchaseListener {
 
     override val kodein by kodein()
     private val factory by instance<AuthViewModelFactory>()
     private lateinit var viewModel: AuthViewModel
+    private lateinit var billingUtils: BillingUtils
     private lateinit var billingClient: BillingClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val billingUtils = BillingUtils(this).getInstance()
-        billingUtils?.purchaseHandlerListener = this
-        billingClient = billingUtils?.setupBillingClient()!!
+        billingUtils = BillingUtils(this).getInstance()!!
+        billingClient = billingUtils.setupBillingClient()
+        billingUtils.purchaseListener = this
         billingUtils.startConnection()
 
         val binding: LoginLayoutBinding =
-                DataBindingUtil.setContentView(this, R.layout.login_layout)
+            DataBindingUtil.setContentView(this, R.layout.login_layout)
         viewModel = ViewModelProvider(this, factory).get(AuthViewModel::class.java)
         binding.viewmodel = viewModel
 
@@ -53,11 +55,15 @@ class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware, BillingUti
         if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
 
             // Grant entitlement to the user.
-            Toasty.success(this, getString(R.string.purchase_successful_text), Toast.LENGTH_LONG).show()
-
             // Check if user is signed in (non-null) and update UI accordingly.
-            viewModel.user?.let {
+            if (viewModel.user != null) {
                 startHomeActivity()
+            } else {
+                Toasty.success(
+                    this,
+                    getString(R.string.purchase_successful_text),
+                    Toast.LENGTH_LONG
+                ).show()
             }
 
             // Acknowledge the purchase if it hasn't already been acknowledged.
@@ -67,15 +73,26 @@ class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware, BillingUti
                         .setPurchaseToken(purchase.purchaseToken)
 
                 lifecycleScope.launch {
-                    val ackPurchaseResult = withContext(Dispatchers.IO) {
+                    withContext(Dispatchers.IO) {
                         billingClient.acknowledgePurchase(acknowledgePurchaseParams.build())
                     }
                 }
             }
         } else if (purchase.purchaseState == Purchase.PurchaseState.PENDING) {
-            Toasty.warning(this, getString(R.string.purchase_pending_text), Toast.LENGTH_LONG).show()
+            Toasty.warning(this, getString(R.string.purchase_pending_text), Toast.LENGTH_LONG)
+                .show()
         } else {
-            Toasty.error(this, getString(R.string.purchase_unspecified_state_text), Toast.LENGTH_LONG).show()
+            Toasty.error(
+                this,
+                getString(R.string.purchase_unspecified_state_text),
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+
+    override fun onActiveSubscription() {
+        viewModel.user?.let {
+            startHomeActivity()
         }
     }
 
