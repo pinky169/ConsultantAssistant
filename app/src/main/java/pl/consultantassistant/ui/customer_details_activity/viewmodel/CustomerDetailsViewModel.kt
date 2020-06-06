@@ -31,14 +31,15 @@ class CustomerDetailsViewModel(application: Application, private val repository:
 
         detailsLiveData = Transformations.map(detailsDataSnapshotLiveData) { DetailsDeserializer().apply(it) }
 
-        productsDataSnapshotLiveData =  Transformations.switchMap(CustomerMediatorLiveData(partnerID, customerID)) {
+        productsDataSnapshotLiveData = Transformations.switchMap(CustomerMediatorLiveData(partnerID, customerID)) {
             FirebaseQueryLiveData(repository.getCustomerProductsReference(it.first!!, it.second!!))
         }
 
         productsLiveData = Transformations.map(productsDataSnapshotLiveData) { ProductsDeserializer().apply(it) }
 
-        photosDataSnapshotLiveData =  Transformations.switchMap(CustomerMediatorLiveData(partnerID, customerID)) {
-            FirebaseQueryLiveData(repository.getCustomerPhotosReference(it.first!!, it.second!!))
+        photosDataSnapshotLiveData = Transformations.switchMap(CustomerMediatorLiveData(partnerID, customerID)) {
+            // Query customer photos and order by lastModified value of the photo
+            FirebaseQueryLiveData(repository.getCustomerPhotosReference(it.first!!, it.second!!).orderByChild("photoLastModifiedDate"))
         }
 
         photosLiveData = Transformations.map(photosDataSnapshotLiveData) { PhotosDeserializer().apply(it) }

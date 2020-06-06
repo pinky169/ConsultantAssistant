@@ -185,5 +185,6 @@
     <string name="purchase_pending_text">Zakup w toku</string>
     <string name="purchase_unspecified_state_text">Coś poszło nie tak. Spróbuj ponownie</string>
     <string name="billing_subscription_not_active_toast">Aktywuj subskrypcję, aby uzyskać dostęp</string>
+    <string name="permission_request_denied_text">Odmówiono dostępu</string>
 
 </resources>

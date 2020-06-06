@@ -185,5 +185,6 @@
     <string name="purchase_pending_text">Purchase pending</string>
     <string name="purchase_unspecified_state_text">Something went wrong. Please try again</string>
     <string name="billing_subscription_not_active_toast">Please activate a subscription to gain access</string>
+    <string name="permission_request_denied_text">Permission denied</string>
 
 </resources>

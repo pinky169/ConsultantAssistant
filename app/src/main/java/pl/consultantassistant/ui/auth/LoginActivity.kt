@@ -25,8 +25,7 @@ import pl.consultantassistant.utils.AuthListener
 import pl.consultantassistant.utils.BillingUtils
 import pl.consultantassistant.utils.startHomeActivity
 
-class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware,
-    BillingUtils.PurchaseListener {
+class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware, BillingUtils.PurchaseListener {
 
     override val kodein by kodein()
     private val factory by instance<AuthViewModelFactory>()

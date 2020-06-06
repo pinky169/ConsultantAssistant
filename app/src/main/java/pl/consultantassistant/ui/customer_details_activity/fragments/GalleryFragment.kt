@@ -1,13 +1,16 @@
 package pl.consultantassistant.ui.customer_details_activity.fragments
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,7 +22,10 @@ import pl.consultantassistant.data.models.Photo
 import pl.consultantassistant.ui.customer_details_activity.adapter.PhotosAdapter
 import pl.consultantassistant.ui.customer_details_activity.viewmodel.CustomerDetailsViewModel
 import pl.consultantassistant.utils.GalleryItemListener
+import pl.consultantassistant.utils.getPath
 import pl.consultantassistant.utils.startFullScreenPhotoActivity
+import java.io.File
+
 
 class GalleryFragment : Fragment(), GalleryItemListener {
 
@@ -104,17 +110,39 @@ class GalleryFragment : Fragment(), GalleryItemListener {
     }
 
     private fun openFileChooser() {
-        val intent = Intent().also {
-            it.type = "image/*"
-            it.action = Intent.ACTION_GET_CONTENT
-            it.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+
+        if (checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED) {
+
+            requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), PERMISSION_READ_EXTERNAL_STORAGE_REQUEST_CODE)
+
+        } else {
+
+            val intent = Intent().also {
+                it.type = "image/*"
+                it.action = Intent.ACTION_GET_CONTENT
+                it.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            }
+
+            startActivityForResult(Intent.createChooser(intent, getString(R.string.intent_image_chooser_title)), PICK_IMAGE_REQUEST)
         }
-        startActivityForResult(
-            Intent.createChooser(
-                intent,
-                getString(R.string.intent_image_chooser_title)
-            ), PICK_IMAGE_REQUEST
-        )
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == PERMISSION_READ_EXTERNAL_STORAGE_REQUEST_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+            val intent = Intent().also {
+                it.type = "image/*"
+                it.action = Intent.ACTION_GET_CONTENT
+                it.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            }
+
+            startActivityForResult(Intent.createChooser(intent, getString(R.string.intent_image_chooser_title)), PICK_IMAGE_REQUEST)
+        }
+        else {
+            Toasty.warning(requireContext(), getString(R.string.permission_request_denied_text), Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun getFileExtension(uri: Uri?): String? {
@@ -125,6 +153,14 @@ class GalleryFragment : Fragment(), GalleryItemListener {
     private fun uploadPhotoAndStoreInDatabase(imageUri: Uri) {
 
         val fileExtension = getFileExtension(imageUri)!!
+        var lastModifiedDate: Long = System.currentTimeMillis()
+
+        getPath(requireActivity(), imageUri)?.let {
+            val file = File(it)
+            if (file.exists()) {
+                lastModifiedDate = file.lastModified()
+            }
+        }
 
         val newPhotoReference = viewModel.getCustomerPhotosReference(partnerID, customerID).push()
         val newPhotoKey = newPhotoReference.key!!
@@ -138,28 +174,20 @@ class GalleryFragment : Fragment(), GalleryItemListener {
 
                 imageReference.downloadUrl.addOnSuccessListener {
                     val imgURL = it.toString()
-                    val newPhoto = Photo(customerID, newPhotoKey, imgURL, fileExtension)
+                    val newPhoto = Photo(customerID, newPhotoKey, imgURL, fileExtension, lastModifiedDate)
                     viewModel.insertPhoto(partnerID, newPhoto)
                     gallery_progress_bar?.visibility = View.GONE
                 }
 
                 context?.let {
-                    Toasty.success(
-                        it,
-                        getString(R.string.image_upload_success_toast_message),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toasty.success(it, getString(R.string.image_upload_success_toast_message), Toast.LENGTH_SHORT).show()
                 }
 
             }
             .addOnCanceledListener {
                 gallery_progress_bar?.visibility = View.GONE
                 context?.let {
-                    Toasty.error(
-                        it,
-                        getString(R.string.image_upload_error_toast_message),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toasty.error(it, getString(R.string.image_upload_error_toast_message), Toast.LENGTH_SHORT).show()
                 }
             }
     }
@@ -234,5 +262,6 @@ class GalleryFragment : Fragment(), GalleryItemListener {
 
     companion object {
         private const val PICK_IMAGE_REQUEST = 1337
+        private const val PERMISSION_READ_EXTERNAL_STORAGE_REQUEST_CODE = 3117
     }
 }

@@ -58,7 +58,7 @@ class BillingUtils(private val activity: Activity) : PurchasesUpdatedListener {
 
                     } else {
 
-                        Toasty.success(
+                        Toasty.warning(
                             activity,
                             activity.getString(R.string.billing_subscription_not_active_toast),
                             Toast.LENGTH_LONG
