@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
-import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat.checkSelfPermission
@@ -22,9 +21,9 @@ import pl.consultantassistant.data.models.Photo
 import pl.consultantassistant.ui.customer_details_activity.adapter.PhotosAdapter
 import pl.consultantassistant.ui.customer_details_activity.viewmodel.CustomerDetailsViewModel
 import pl.consultantassistant.utils.GalleryItemListener
-import pl.consultantassistant.utils.getPath
+import pl.consultantassistant.utils.getFileExtension
+import pl.consultantassistant.utils.getLastModifiedDate
 import pl.consultantassistant.utils.startFullScreenPhotoActivity
-import java.io.File
 
 
 class GalleryFragment : Fragment(), GalleryItemListener {
@@ -106,7 +105,7 @@ class GalleryFragment : Fragment(), GalleryItemListener {
     }
 
     override fun onItemClicked(photo: Photo) {
-        requireContext().startFullScreenPhotoActivity(photo.photoURL)
+        requireContext().startFullScreenPhotoActivity(photo)
     }
 
     private fun openFileChooser() {
@@ -120,7 +119,8 @@ class GalleryFragment : Fragment(), GalleryItemListener {
 
             val intent = Intent().also {
                 it.type = "image/*"
-                it.action = Intent.ACTION_GET_CONTENT
+                it.action = Intent.ACTION_OPEN_DOCUMENT
+                it.addCategory(Intent.CATEGORY_OPENABLE)
                 it.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             }
 
@@ -134,7 +134,8 @@ class GalleryFragment : Fragment(), GalleryItemListener {
 
             val intent = Intent().also {
                 it.type = "image/*"
-                it.action = Intent.ACTION_GET_CONTENT
+                it.action = Intent.ACTION_OPEN_DOCUMENT
+                it.addCategory(Intent.CATEGORY_OPENABLE)
                 it.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             }
 
@@ -145,22 +146,10 @@ class GalleryFragment : Fragment(), GalleryItemListener {
         }
     }
 
-    private fun getFileExtension(uri: Uri?): String? {
-        val mime = MimeTypeMap.getSingleton()
-        return mime.getExtensionFromMimeType(requireActivity().contentResolver.getType(uri!!))
-    }
-
     private fun uploadPhotoAndStoreInDatabase(imageUri: Uri) {
 
-        val fileExtension = getFileExtension(imageUri)!!
-        var lastModifiedDate: Long = System.currentTimeMillis()
-
-        getPath(requireActivity(), imageUri)?.let {
-            val file = File(it)
-            if (file.exists()) {
-                lastModifiedDate = file.lastModified()
-            }
-        }
+        val fileExtension: String = getFileExtension(requireActivity(), imageUri)!!
+        val lastModifiedDate: String = getLastModifiedDate(requireActivity(), imageUri)
 
         val newPhotoReference = viewModel.getCustomerPhotosReference(partnerID, customerID).push()
         val newPhotoKey = newPhotoReference.key!!

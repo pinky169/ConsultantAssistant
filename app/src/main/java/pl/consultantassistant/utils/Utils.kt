@@ -31,11 +31,12 @@ fun Context.startSignUpActivity() =
         startActivity(it)
     }
 
-fun Context.startFullScreenPhotoActivity(photoURL: String) =
+fun Context.startFullScreenPhotoActivity(photo: Photo) =
     Intent(this, FullScreenPhotoActivity::class.java).also {
         it.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
         it.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        it.putExtra("photoURL", photoURL)
+        it.putExtra("photoURL", photo.photoURL)
+        it.putExtra("photoLastModified", photo.photoLastModifiedDate)
         startActivity(it)
     }
 

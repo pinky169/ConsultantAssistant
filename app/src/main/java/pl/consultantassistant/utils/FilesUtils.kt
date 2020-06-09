@@ -8,7 +8,58 @@ import android.os.Build
 import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
+import android.text.format.DateFormat
+import android.webkit.MimeTypeMap
+import java.io.File
+import java.util.*
 
+fun getFileExtension(context : Context, uri: Uri?): String? {
+    val mime = MimeTypeMap.getSingleton()
+    return mime.getExtensionFromMimeType(context.contentResolver.getType(uri!!))
+}
+
+fun convertTimestampToHumanReadable(timestamp: Long): String {
+    return DateFormat.format("yyyy-MM-dd'T'HH:mm:sss'Z'", Date(timestamp)).toString()
+}
+
+fun getLastModifiedTimestamp(context: Context, uri: Uri?): Long? {
+
+    var lastModified: Long? = null
+
+    context.contentResolver.query(uri!!, null, null, null, null)?.use { cursor ->
+
+        lastModified = try {
+            val colDateModified = cursor.getColumnIndexOrThrow(DocumentsContract.Document.COLUMN_LAST_MODIFIED)
+            cursor.moveToFirst()
+            cursor.getLong(colDateModified)
+        } catch (e: Exception) {
+            0
+        }
+    }
+    return lastModified
+}
+
+fun getLastModifiedDate(context: Context, uri: Uri?): String {
+
+    val mimeType = context.contentResolver.getType(uri!!)
+
+    if (mimeType == null) {
+        val filePath = getPath(context, uri)
+        return if (filePath != null) {
+            val file = File(filePath)
+            convertTimestampToHumanReadable(file.lastModified())
+        } else {
+            convertTimestampToHumanReadable(System.currentTimeMillis())
+        }
+    } else {
+        val lastMod = getLastModifiedTimestamp(context, uri)
+        return if (lastMod != null) {
+            convertTimestampToHumanReadable(lastMod)
+        } else {
+            convertTimestampToHumanReadable(System.currentTimeMillis())
+        }
+    }
+}
 
 fun getPath(context: Context, uri: Uri): String? {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
