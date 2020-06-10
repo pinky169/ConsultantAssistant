@@ -48,6 +48,12 @@
         <item>Curly on a curler</item>
     </string-array>
 
+    <string-array name="type_of_products_spinner_list">
+        <item>Customer products</item>
+        <item>Proposed products</item>
+        <item>Product samples</item>
+    </string-array>
+
     <string-array name="products_section_one">
         <item>REJUVENIQE Oil Intensive</item>
         <item>REJUVENIQE LIGHT by Monat</item>

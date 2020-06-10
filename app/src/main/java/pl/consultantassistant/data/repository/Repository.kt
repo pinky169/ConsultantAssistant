@@ -66,16 +66,17 @@ class Repository(private val firebase: FirebaseAuthHelper, private val firebaseD
     *       Customer products
     * **************************/
 
-    fun getCustomerProductsReference(uid: String, customerID: String) = firebaseDB.getSpecificCustomerProductsReference(uid, customerID)
+    fun getCustomerProductsReference(uid: String, customerID: String, productsType: Int) = firebaseDB.getSpecificCustomerProductsReference(uid, customerID, productsType)
 
-    fun insertProduct(uid: String, product: Product) = firebaseDB.insertCustomerProduct(uid, product)
+    fun insertProduct(uid: String, product: Product, productsType: Int) = firebaseDB.insertCustomerProduct(uid, product, productsType)
 
-    fun updateProduct(uid: String, product: Product) =
-        firebaseDB.updateCustomerProduct(uid, product)
+    fun updateProduct(uid: String, product: Product, productsType: Int) = firebaseDB.updateCustomerProduct(uid, product, productsType)
 
-    fun deleteCustomerProduct(uid: String, product: Product) = firebaseDB.deleteCustomerProduct(uid, product)
+    fun deleteCustomerProduct(uid: String, product: Product, productsType: Int) = firebaseDB.deleteCustomerProduct(uid, product, productsType)
 
-    fun deleteAllCustomerProducts(uid: String, customerID: String) = firebaseDB.deleteAllCustomerProducts(uid, customerID)
+    fun deleteCustomerProducts(uid: String, customerID: String, productsType: Int) = firebaseDB.deleteCustomerProducts(uid, customerID, productsType)
+
+    private fun deleteAllCustomerProducts(uid: String, customerID: String) = firebaseDB.deleteAllCustomerProducts(uid, customerID)
 
 
     /* **************************

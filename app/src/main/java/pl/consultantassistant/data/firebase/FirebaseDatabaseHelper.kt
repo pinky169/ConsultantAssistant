@@ -76,20 +76,45 @@ class FirebaseDatabaseHelper {
     **************************************************** */
 
     private val customersProductsReference: DatabaseReference by lazy {
-        database.getReference("products")
+        database.getReference("products/products")
     }
 
-    fun getSpecificCustomerProductsReference(uid: String, customerID: String): DatabaseReference {
-        return customersProductsReference.child(uid).child(customerID)
+    private val customersProposedProductsReference: DatabaseReference by lazy {
+        database.getReference("products/proposed")
     }
 
-    fun insertCustomerProduct(uid: String, product: Product) = getSpecificCustomerProductsReference(uid, product.customerID).child(product.productID).setValue(product)
+    private val customersProductsSamplesReference: DatabaseReference by lazy {
+        database.getReference("products/samples")
+    }
 
-    fun updateCustomerProduct(uid: String, product: Product) = getSpecificCustomerProductsReference(uid, product.customerID).child(product.productID).updateChildren(product.toMap())
+    fun getSpecificCustomerProductsReference(uid: String, customerID: String, productsType: Int): DatabaseReference {
+        return when (productsType) {
+            0 -> customersProductsReference.child(uid).child(customerID)
+            1 -> customersProposedProductsReference.child(uid).child(customerID)
+            2 -> customersProductsSamplesReference.child(uid).child(customerID)
+            else -> customersProductsReference.child(uid).child(customerID)
+        }
+    }
 
-    fun deleteCustomerProduct(uid: String, product: Product) = getSpecificCustomerProductsReference(uid, product.customerID).child(product.productID).removeValue()
+    fun insertCustomerProduct(uid: String, product: Product, productsType: Int) = getSpecificCustomerProductsReference(uid, product.customerID, productsType).child(product.productID).setValue(product)
 
-    fun deleteAllCustomerProducts(uid: String, customerID: String) = getSpecificCustomerProductsReference(uid, customerID).removeValue()
+    fun updateCustomerProduct(uid: String, product: Product, productsType: Int) = getSpecificCustomerProductsReference(uid, product.customerID, productsType).child(product.productID).updateChildren(product.toMap())
+
+    fun deleteCustomerProduct(uid: String, product: Product, productsType: Int) = getSpecificCustomerProductsReference(uid, product.customerID, productsType).child(product.productID).removeValue()
+
+    fun deleteCustomerProducts(uid: String, customerID: String, productsType: Int) {
+        when (productsType) {
+            0 -> customersProductsReference.child(uid).child(customerID).removeValue()
+            1 -> customersProposedProductsReference.child(uid).child(customerID).removeValue()
+            2 -> customersProductsSamplesReference.child(uid).child(customerID).removeValue()
+        }
+    }
+
+    fun deleteAllCustomerProducts(uid: String, customerID: String) {
+        customersProductsReference.child(uid).child(customerID).removeValue()
+        customersProposedProductsReference.child(uid).child(customerID).removeValue()
+        customersProductsSamplesReference.child(uid).child(customerID).removeValue()
+    }
 
 
     /* ***************************************************

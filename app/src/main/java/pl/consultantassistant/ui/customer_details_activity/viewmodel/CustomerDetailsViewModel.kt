@@ -16,6 +16,7 @@ class CustomerDetailsViewModel(application: Application, private val repository:
 
     private val partnerID = MutableLiveData<String>()
     private val customerID = MutableLiveData<String>()
+    private val productsType = MutableLiveData<Int>()
     private val detailsLiveData: LiveData<CustomerDetails>
     private val detailsDataSnapshotLiveData: LiveData<DataSnapshot>
     private val productsLiveData: LiveData<List<Product>>
@@ -25,21 +26,23 @@ class CustomerDetailsViewModel(application: Application, private val repository:
 
     init {
 
-        detailsDataSnapshotLiveData = Transformations.switchMap(CustomerMediatorLiveData(partnerID, customerID)) {
-            FirebaseQueryLiveData(repository.getCustomerDetailsReference(it.first!!, it.second!!))
+        detailsDataSnapshotLiveData = Transformations.switchMap(CustomerMediatorLiveData(partnerID, customerID, productsType)) {
+            FirebaseQueryLiveData(repository.getCustomerDetailsReference(it.first.first!!, it.first.second!!))
         }
 
         detailsLiveData = Transformations.map(detailsDataSnapshotLiveData) { DetailsDeserializer().apply(it) }
 
-        productsDataSnapshotLiveData = Transformations.switchMap(CustomerMediatorLiveData(partnerID, customerID)) {
-            FirebaseQueryLiveData(repository.getCustomerProductsReference(it.first!!, it.second!!))
+        setProductsType(0)
+
+        productsDataSnapshotLiveData = Transformations.switchMap(CustomerMediatorLiveData(partnerID, customerID, productsType)) {
+            FirebaseQueryLiveData(repository.getCustomerProductsReference(it.first.first!!, it.first.second!!, it.second!!))
         }
 
         productsLiveData = Transformations.map(productsDataSnapshotLiveData) { ProductsDeserializer().apply(it) }
 
-        photosDataSnapshotLiveData = Transformations.switchMap(CustomerMediatorLiveData(partnerID, customerID)) {
+        photosDataSnapshotLiveData = Transformations.switchMap(CustomerMediatorLiveData(partnerID, customerID, productsType)) {
             // Query customer photos and order by lastModified value of the photo
-            FirebaseQueryLiveData(repository.getCustomerPhotosReference(it.first!!, it.second!!).orderByChild("photoLastModifiedDate"))
+            FirebaseQueryLiveData(repository.getCustomerPhotosReference(it.first.first!!, it.first.second!!).orderByChild("photoLastModifiedDate"))
         }
 
         photosLiveData = Transformations.map(photosDataSnapshotLiveData) { PhotosDeserializer().apply(it) }
@@ -87,26 +90,34 @@ class CustomerDetailsViewModel(application: Application, private val repository:
     *       Customer products
     * **************************/
 
+    fun setProductsType(type: Int) {
+        productsType.value = type
+    }
+
+    fun getProductsType(): LiveData<Int> {
+        return productsType
+    }
+
     fun getCustomerProducts(): LiveData<List<Product>> {
         return productsLiveData
     }
 
-    fun getCustomerProductsReference(uid: String, customerID: String) = repository.getCustomerProductsReference(uid, customerID)
+    fun getCustomerProductsReference(uid: String, customerID: String, productsType: Int) = repository.getCustomerProductsReference(uid, customerID, productsType)
 
-    fun insertProduct(partnerID: String, product: Product) = viewModelScope.launch(Dispatchers.IO) {
-        repository.insertProduct(partnerID, product)
+    fun insertProduct(partnerID: String, product: Product, productsType: Int) = viewModelScope.launch(Dispatchers.IO) {
+        repository.insertProduct(partnerID, product, productsType)
     }
 
-    fun updateProduct(partnerID: String, product: Product) = viewModelScope.launch(Dispatchers.IO) {
-        repository.updateProduct(partnerID, product)
+    fun updateProduct(partnerID: String, product: Product, productsType: Int) = viewModelScope.launch(Dispatchers.IO) {
+        repository.updateProduct(partnerID, product, productsType)
     }
 
-    fun deleteCustomerProduct(partnerID: String, product: Product) = viewModelScope.launch(Dispatchers.IO) {
-        repository.deleteCustomerProduct(partnerID, product)
+    fun deleteCustomerProduct(partnerID: String, product: Product, productsType: Int) = viewModelScope.launch(Dispatchers.IO) {
+        repository.deleteCustomerProduct(partnerID, product, productsType)
     }
 
-    fun deleteAllCustomerProducts(partnerID: String, customerID: String) = viewModelScope.launch(Dispatchers.IO) {
-        repository.deleteAllCustomerProducts(partnerID, customerID)
+    fun deleteCustomerProducts(partnerID: String, customerID: String, productsType: Int) = viewModelScope.launch(Dispatchers.IO) {
+        repository.deleteCustomerProducts(partnerID, customerID, productsType)
     }
 
 
@@ -145,15 +156,19 @@ class CustomerDetailsViewModel(application: Application, private val repository:
     *      Helper classes
     * **************************/
 
-    inner class CustomerMediatorLiveData<String>(partnerID: LiveData<String>, customerID: LiveData<String>): MediatorLiveData<Pair<String?, String?>>() {
+    inner class CustomerMediatorLiveData(partnerID: LiveData<String>, customerID: LiveData<String>, productsType: LiveData<Int>) : MediatorLiveData<Pair<Pair<String?, String?>, Int?>>() {
 
         init {
             addSource(partnerID) {
-                value = it to customerID.value
+                value = it to customerID.value to productsType.value
             }
 
             addSource(customerID) {
-                value = partnerID.value to it
+                value = partnerID.value to it to productsType.value
+            }
+
+            addSource(productsType) {
+                value = partnerID.value to customerID.value to it
             }
         }
     }

@@ -4,6 +4,7 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.*
+import android.widget.AdapterView
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -21,7 +22,7 @@ import pl.consultantassistant.ui.customer_details_activity.fragments.DetailsFrag
 import pl.consultantassistant.ui.customer_details_activity.viewmodel.CustomerDetailsViewModel
 import java.util.*
 
-class ProductsFragment : Fragment() {
+class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     // ViewModel
     private lateinit var viewModel: CustomerDetailsViewModel
@@ -34,6 +35,12 @@ class ProductsFragment : Fragment() {
 
     // ID of the selected customer
     private lateinit var customerID: String
+
+    // Type of products to load into RecyclerView
+    // 0 - customer products actually bought
+    // 1 - proposed products for customer to buy in the future
+    // 2 - products samples chosen for customer
+    private var productsType: Int = 0
 
     // State with information if editing
     // the list of customer products is enabled or not
@@ -74,6 +81,7 @@ class ProductsFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity()).get(CustomerDetailsViewModel::class.java)
         viewModel.getPartnerId().observe(viewLifecycleOwner, Observer { partnerID = it })
         viewModel.getCustomerId().observe(viewLifecycleOwner, Observer { customerID = it })
+        viewModel.getProductsType().observe(viewLifecycleOwner, Observer { productsType = it })
         viewModel.getCustomerProducts().observe(viewLifecycleOwner, Observer { productList ->
             showOrHideProducts(productList)
             recyclerAdapter.submitList(productList)
@@ -206,45 +214,53 @@ class ProductsFragment : Fragment() {
 
     private fun saveProducts() {
 
-        viewModel.deleteAllCustomerProducts(partnerID, customerID).invokeOnCompletion {
+        viewModel.deleteCustomerProducts(partnerID, customerID, productsType).invokeOnCompletion {
             for (product in productsToSubmit) {
 
-                val newProductReference =
-                    viewModel.getCustomerProductsReference(partnerID, customerID).push()
+                val newProductReference = viewModel.getCustomerProductsReference(partnerID, customerID, productsType).push()
                 val newProductKey = newProductReference.key!!
                 val newProduct = Product(customerID, newProductKey, product)
 
-                viewModel.insertProduct(partnerID, newProduct)
+                viewModel.insertProduct(partnerID, newProduct, productsType)
             }
         }
     }
 
     private fun setupListeners() {
         products_empty_view.setOnClickListener { switchProductsView() }
+        type_of_products_spinner.onItemSelectedListener = this@ProductsFragment
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        viewModel.setProductsType(position)
     }
 
     private fun getAllPossibleProducts(): List<Array<String>> {
 
-        val groupOne = requireActivity().resources.getStringArray(R.array.products_section_one)
-        val groupTwo = requireActivity().resources.getStringArray(R.array.products_section_two)
-        val groupThree = requireActivity().resources.getStringArray(R.array.products_section_three)
-        val groupFour = requireActivity().resources.getStringArray(R.array.products_section_four)
-        val groupFive = requireActivity().resources.getStringArray(R.array.products_section_five)
-        val groupSix = requireActivity().resources.getStringArray(R.array.products_section_six)
-        val groupSeven = requireActivity().resources.getStringArray(R.array.products_section_seven)
-        val groupEight = requireActivity().resources.getStringArray(R.array.products_section_eight)
-        val groupNine = requireActivity().resources.getStringArray(R.array.products_section_nine)
-        val groupTen = requireActivity().resources.getStringArray(R.array.products_section_ten)
+        val resources = requireActivity().resources
+
+        val groupOne = resources.getStringArray(R.array.products_section_one)
+        val groupTwo = resources.getStringArray(R.array.products_section_two)
+        val groupThree = resources.getStringArray(R.array.products_section_three)
+        val groupFour = resources.getStringArray(R.array.products_section_four)
+        val groupFive = resources.getStringArray(R.array.products_section_five)
+        val groupSix = resources.getStringArray(R.array.products_section_six)
+        val groupSeven = resources.getStringArray(R.array.products_section_seven)
+        val groupEight = resources.getStringArray(R.array.products_section_eight)
+        val groupNine = resources.getStringArray(R.array.products_section_nine)
+        val groupTen = resources.getStringArray(R.array.products_section_ten)
 
         allProductsArray = listOf(
-            groupOne,
-            groupTwo,
-            groupThree,
-            groupFour,
-            groupFive,
-            groupSix,
-            groupSeven,
-            groupEight,
+                groupOne,
+                groupTwo,
+                groupThree,
+                groupFour,
+                groupFive,
+                groupSix,
+                groupSeven,
+                groupEight,
             groupNine,
             groupTen
         )

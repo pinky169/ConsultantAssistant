@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
@@ -34,34 +35,35 @@ class PhotosAdapter : ListAdapter<Photo, PhotosAdapter.ViewHolder>(diffCallback)
             progressBar.visibility = View.VISIBLE
 
             Glide.with(itemContext)
-                .load(Uri.parse(photo.photoURL))
-                .listener(object : RequestListener<Drawable> {
-                    override fun onLoadFailed(
-                        e: GlideException?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        progressBar.visibility = View.GONE
-                        popupMenu.visibility = View.GONE
-                        return false
-                    }
+                    .load(Uri.parse(photo.photoURL))
+                    .listener(object : RequestListener<Drawable> {
+                        override fun onLoadFailed(
+                                e: GlideException?,
+                                model: Any?,
+                                target: Target<Drawable>?,
+                                isFirstResource: Boolean
+                        ): Boolean {
+                            progressBar.visibility = View.GONE
+                            popupMenu.visibility = View.GONE
+                            return false
+                        }
 
-                    override fun onResourceReady(
-                        resource: Drawable?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        dataSource: DataSource?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        progressBar.visibility = View.GONE
-                        popupMenu.visibility = View.VISIBLE
-                        return false
-                    }
-                })
-                .thumbnail(0.2f)
-                .centerCrop()
-                .into(photoImageView)
+                        override fun onResourceReady(
+                                resource: Drawable?,
+                                model: Any?,
+                                target: Target<Drawable>?,
+                                dataSource: DataSource?,
+                                isFirstResource: Boolean
+                        ): Boolean {
+                            progressBar.visibility = View.GONE
+                            popupMenu.visibility = View.VISIBLE
+                            return false
+                        }
+                    })
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                    .thumbnail(0.2f)
+                    .centerCrop()
+                    .into(photoImageView)
 
             itemView.setOnClickListener { itemListener?.onItemClicked(photo) }
             popupMenu.setOnClickListener { itemListener?.createPopupMenu(popupMenu, photo) }
@@ -79,14 +81,14 @@ class PhotosAdapter : ListAdapter<Photo, PhotosAdapter.ViewHolder>(diffCallback)
 
         val diffCallback: DiffUtil.ItemCallback<Photo> = object : DiffUtil.ItemCallback<Photo>() {
 
-                override fun areItemsTheSame(oldItem: Photo, newItem: Photo): Boolean {
-                    return oldItem.photoID == newItem.photoID
-                }
-
-                override fun areContentsTheSame(oldItem: Photo, newItem: Photo): Boolean {
-                    return oldItem.customerID == newItem.customerID &&
-                            oldItem.photoURL == newItem.photoURL
-                }
+            override fun areItemsTheSame(oldItem: Photo, newItem: Photo): Boolean {
+                return oldItem.photoID == newItem.photoID
             }
+
+            override fun areContentsTheSame(oldItem: Photo, newItem: Photo): Boolean {
+                return oldItem.customerID == newItem.customerID &&
+                        oldItem.photoURL == newItem.photoURL
+            }
+        }
     }
 }

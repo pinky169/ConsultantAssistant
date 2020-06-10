@@ -48,6 +48,12 @@
         <item>Kręcone lokówką</item>
     </string-array>
 
+    <string-array name="type_of_products_spinner_list">
+        <item>Produkty klienta</item>
+        <item>Proponowane produkty</item>
+        <item>Próbki produktów</item>
+    </string-array>
+
     <string-array name="products_section_one">
         <item>Intensywny olejek REJUVENIQE</item>
         <item>REJUVENIQE LIGHT by Monat</item>
