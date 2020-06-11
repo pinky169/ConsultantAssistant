@@ -1,6 +1,7 @@
 package pl.consultantassistant.ui.home
 
 import android.app.Activity
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -10,6 +11,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
@@ -159,6 +161,31 @@ class HomeActivity : AppCompatActivity(), CustomerItemListener, LoadingListener,
         }
     }
 
+    private fun setDialogOnClickListener(partnerID: String, customer: Customer): DialogInterface.OnClickListener {
+
+        return DialogInterface.OnClickListener { _, whichButton ->
+            when (whichButton) {
+                DialogInterface.BUTTON_POSITIVE -> {
+
+                    viewModel.deleteCustomer(partnerID, customer.customerID)
+                    Toasty.success(
+                            this,
+                            getString(
+                                    R.string.menu_delete_person_success_text,
+                                    customer.name,
+                                    customer.surname
+                            ),
+                            Toast.LENGTH_LONG
+                    ).show()
+
+                }
+                DialogInterface.BUTTON_NEGATIVE -> {
+                    return@OnClickListener
+                }
+            }
+        }
+    }
+
     override fun createPopupMenu(view: View, position: Int, customer: Customer) {
         // Creating a popup menu
         val popup = PopupMenu(view.context, view)
@@ -175,19 +202,19 @@ class HomeActivity : AppCompatActivity(), CustomerItemListener, LoadingListener,
         // Adding click listener
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
+
                 R.id.home_recycler_view_item_action_delete -> {
-                    viewModel.deleteCustomer(partnerID, customer.customerID)
-                    Toasty.success(
-                        this,
-                        getString(
-                            R.string.menu_delete_person_success_text,
-                            customer.name,
-                            customer.surname
-                        ),
-                        Toast.LENGTH_LONG
-                    ).show()
+
+                    val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+
+                    builder.setMessage(getString(R.string.alert_dialog_delete_customer_title, customer.name, customer.surname))
+                            .setPositiveButton(getString(R.string.alert_dialog_button_positive_text), setDialogOnClickListener(partnerID, customer))
+                            .setNegativeButton(getString(R.string.alert_dialog_button_negative_text), setDialogOnClickListener(partnerID, customer))
+                            .show()
+
                     true
                 }
+
                 R.id.home_recycler_view_item_action_edit -> {
                     val intent = Intent(this, NewCustomerActivity::class.java)
                     intent.putExtra("position", position)
@@ -195,6 +222,7 @@ class HomeActivity : AppCompatActivity(), CustomerItemListener, LoadingListener,
                     startActivityForResult(intent, UPDATE_CUSTOMER_REQUEST_CODE)
                     true
                 }
+
                 else -> false
             }
         }

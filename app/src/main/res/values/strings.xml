@@ -192,5 +192,8 @@
     <string name="purchase_unspecified_state_text">Something went wrong. Please try again</string>
     <string name="billing_subscription_not_active_toast">Please activate a subscription to gain access</string>
     <string name="permission_request_denied_text">Permission denied</string>
+    <string name="alert_dialog_delete_customer_title">Are you sure you want to delete %1$s %2$s?</string>
+    <string name="alert_dialog_button_positive_text">Yes</string>
+    <string name="alert_dialog_button_negative_text">No</string>
 
 </resources>

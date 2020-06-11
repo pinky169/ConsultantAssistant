@@ -192,5 +192,8 @@
     <string name="purchase_unspecified_state_text">Coś poszło nie tak. Spróbuj ponownie</string>
     <string name="billing_subscription_not_active_toast">Aktywuj subskrypcję, aby uzyskać dostęp</string>
     <string name="permission_request_denied_text">Odmówiono dostępu</string>
+    <string name="alert_dialog_delete_customer_title">Czy na pewno chcesz usunąć %1$s %2$s?</string>
+    <string name="alert_dialog_button_positive_text">Tak</string>
+    <string name="alert_dialog_button_negative_text">Nie</string>
 
 </resources>

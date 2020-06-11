@@ -142,6 +142,9 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         // Update menu
         requireActivity().invalidateOptionsMenu()
+
+        // Always show customer products first
+        products_view_switcher.displayedChild = 0
     }
 
     override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {

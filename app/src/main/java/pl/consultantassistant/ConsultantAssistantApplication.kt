@@ -12,9 +12,9 @@ import pl.consultantassistant.data.firebase.FirebaseAuthHelper
 import pl.consultantassistant.data.firebase.FirebaseDatabaseHelper
 import pl.consultantassistant.data.firebase.FirebaseStorageHelper
 import pl.consultantassistant.data.repository.Repository
-import pl.consultantassistant.ui.home.viewmodel.HomeViewModelFactory
 import pl.consultantassistant.ui.auth.AuthViewModelFactory
 import pl.consultantassistant.ui.customer_details_activity.viewmodel.CustomerDetailsViewModelFactory
+import pl.consultantassistant.ui.home.viewmodel.HomeViewModelFactory
 
 class ConsultantAssistantApplication : Application(), KodeinAware {
 
