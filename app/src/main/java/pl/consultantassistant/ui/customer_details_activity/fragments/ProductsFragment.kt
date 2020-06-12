@@ -47,7 +47,7 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private var editingState: String = EDITING_STATE_DISABLED
 
     // Array of strings with names od products
-    private var allProductsArray: List<Array<String>> = emptyList()
+    private var allProductsArray: ArrayList<Array<String>> = arrayListOf()
 
     // ArrayList with current products
     // used to select those products in chip group
@@ -63,9 +63,9 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_products, container, false)
     }
@@ -112,6 +112,7 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 val chip = Chip(requireContext())
                 chip.text = product
                 chip.chipBackgroundColor = ColorStateList.valueOf(color)
+                chip.isAllCaps = true
                 chip.isCheckable = true
                 chip.setOnCheckedChangeListener { button, isChecked ->
                     if (isChecked) {
@@ -244,29 +245,18 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         val resources = requireActivity().resources
 
-        val groupOne = resources.getStringArray(R.array.products_section_one)
-        val groupTwo = resources.getStringArray(R.array.products_section_two)
-        val groupThree = resources.getStringArray(R.array.products_section_three)
-        val groupFour = resources.getStringArray(R.array.products_section_four)
-        val groupFive = resources.getStringArray(R.array.products_section_five)
-        val groupSix = resources.getStringArray(R.array.products_section_six)
-        val groupSeven = resources.getStringArray(R.array.products_section_seven)
-        val groupEight = resources.getStringArray(R.array.products_section_eight)
-        val groupNine = resources.getStringArray(R.array.products_section_nine)
-        val groupTen = resources.getStringArray(R.array.products_section_ten)
+        // Array of string-arrays
+        val typedArray = resources.obtainTypedArray(R.array.all_products)
 
-        allProductsArray = listOf(
-                groupOne,
-                groupTwo,
-                groupThree,
-                groupFour,
-                groupFive,
-                groupSix,
-                groupSeven,
-                groupEight,
-            groupNine,
-            groupTen
-        )
+        for (i in 0..typedArray.length()) {
+            val currentArrayId = typedArray.getResourceId(i, 0)
+            if (currentArrayId > 0) {
+                val currentGroup = resources.getStringArray(currentArrayId)
+                allProductsArray.add(currentGroup)
+            }
+        }
+
+        typedArray.recycle()
 
         return allProductsArray
     }

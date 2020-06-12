@@ -54,63 +54,112 @@
         <item>Próbki produktów</item>
     </string-array>
 
-    <string-array name="products_section_one">
+    <array name="all_products">
+        <item>@array/products_section_1</item>
+        <item>@array/products_section_2</item>
+        <item>@array/products_section_3</item>
+        <item>@array/products_section_4</item>
+        <item>@array/products_section_5</item>
+        <item>@array/products_section_6</item>
+        <item>@array/products_section_7</item>
+        <item>@array/products_section_8</item>
+        <item>@array/products_section_9</item>
+        <item>@array/products_section_10</item>
+        <item>@array/products_section_11</item>
+        <item>@array/products_section_12</item>
+        <item>@array/products_section_13</item>
+        <item>@array/products_section_14</item>
+    </array>
+
+    <string-array name="products_section_1">
         <item>Intensywny olejek REJUVENIQE</item>
         <item>REJUVENIQE LIGHT by Monat</item>
         <item>REJUVABEADS</item>
         <item>LASH &amp; BROW enhancing serum</item>
     </string-array>
 
-    <string-array name="products_section_two">
+    <string-array name="products_section_2">
         <item>Szampon RENEW</item>
         <item>Maska REPLENISH</item>
         <item>Odżywka bez spłukiwania RESTORE</item>
     </string-array>
 
-    <string-array name="products_section_three">
+    <string-array name="products_section_3">
         <item>Szampon REVIVE</item>
         <item>Odżywka REVITALIZE</item>
         <item>Preparat RESHAPE unoszący włosy u nasady</item>
     </string-array>
 
-    <string-array name="products_section_four">
+    <string-array name="products_section_4">
         <item>Szampon INTENSE REPAIR</item>
         <item>Odżywka INTENSE REPAIR</item>
         <item>Kuracja INTENSE REPAIR</item>
     </string-array>
 
-    <string-array name="products_section_five">
+    <string-array name="products_section_5">
         <item>Szampon SMOOTHING</item>
         <item>Odżywka SMOOTHING o głębokim działaniu</item>
     </string-array>
 
-    <string-array name="products_section_six">
+    <string-array name="products_section_6">
         <item>Maska SUPER MOISTURE</item>
     </string-array>
 
-    <string-array name="products_section_seven">
+    <string-array name="products_section_7">
         <item>Szampon ADVANCED HYDRATING</item>
         <item>Odżywka ADVANCED HYDRATING</item>
         <item>DOUBLE ACTION HYDRATING serum</item>
         <item>Maseczka HEAVENLY HYDRATING</item>
     </string-array>
 
-    <string-array name="products_section_eight">
+    <string-array name="products_section_8">
         <item>Odbudowująca odżywka PRZED MYCIEM WŁOSÓW</item>
         <item>Szampon ODBUDOWUJĄCY</item>
         <item>Maska REGENERACYJNO-NAPRAWCZA HAIR TRANSFORMATION</item>
         <item>Serum odbudowujące INNER FORCE</item>
     </string-array>
 
-    <string-array name="products_section_nine">
+    <string-array name="products_section_9">
         <item>Szampon i odżywka MONAT BLACK 2 W 1</item>
+        <item>Olejek do brody MONAT BLACK</item>
     </string-array>
 
-    <string-array name="products_section_ten">
+    <string-array name="products_section_10">
         <item>Krem BLOW OUT</item>
         <item>Spray do włosów REFINISH CONTROL</item>
         <item>Suchy szampon z odżywką THE CHAMP</item>
         <item>Termoochronny krem do stylizacji THERMAL PROTECT</item>
+        <item>FRIZZ-FIX SMOOTHING HAIR PRIMER</item>
+        <item>CURL DEFINING CREAM</item>
+        <item>STRONG FLEXI-HOLD HAIRSPRAY</item>
+        <item>DRY TEXTURIZING SPRAY</item>
+        <item>UNKNOT DETANGLER</item>
+        <item>THICKENING SPRAY</item>
+        <item>COLOR LOCKING + PROTECTIVE SPRAY</item>
+    </string-array>
+
+    <string-array name="products_section_11">
+        <item>SUPER NOURISH Oil creme shampoo</item>
+        <item>SUPER NOURISH Oil creme conditioner</item>
+    </string-array>
+
+    <string-array name="products_section_12">
+        <item>COLOUR ENHANCE BLONDE Shampoo</item>
+        <item>COLOUR ENHANCE BLONDE Conditioner</item>
+        <item>COLOUR ENHANCE PLATINUM Shampoo</item>
+        <item>COLOUR ENHANCE PLATINUM Conditioner</item>
+        <item>COLOUR ENHANCE BRUNETTE Shampoo</item>
+        <item>COLOUR ENHANCE BRUNETTE Conditioner</item>
+    </string-array>
+
+    <string-array name="products_section_13">
+        <item>JUNIOR GENTLE Shampoo</item>
+        <item>JUNIOR GENTLE Conditioner</item>
+        <item>JUNIOR GENTLE Detangler</item>
+    </string-array>
+
+    <string-array name="products_section_14">
+        <item>CLARIFYING Shampoo</item>
     </string-array>
 
     <string name="email_label">Email</string>

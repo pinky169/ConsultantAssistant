@@ -18,6 +18,7 @@ class ProductsAdapter: ListAdapter<Product, ProductsAdapter.ViewHolder>(diffCall
 
         fun bind(product: Product) {
             chip.text = product.productName
+            chip.isAllCaps = true
         }
     }
 
