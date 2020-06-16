@@ -69,6 +69,8 @@
         <item>@array/products_section_12</item>
         <item>@array/products_section_13</item>
         <item>@array/products_section_14</item>
+        <item>@array/products_section_15</item>
+        <item>@array/products_section_16</item>
     </array>
 
     <string-array name="products_section_1">
@@ -160,6 +162,27 @@
 
     <string-array name="products_section_14">
         <item>CLARIFYING shampoo</item>
+    </string-array>
+
+    <string-array name="products_section_15">
+        <item>OFY Micellar soothing shampoo</item>
+        <item>OFY Gloss finishing spray</item>
+        <item>OFY Flexible Hold Gel</item>
+    </string-array>
+
+    <string-array name="products_section_16">
+        <item>Makeup Vanishing Balm</item>
+        <item>Be Gentle Creamy Cleanser</item>
+        <item>Be Gentle Nourishing Moisturizer</item>
+        <item>Be Balanced Foamy Cleanser</item>
+        <item>Be Balanced Lightweight Moisturizer</item>
+        <item>Berry Refined Scrub</item>
+        <item>Skin Revitalizing Essence</item>
+        <item>C. Radiance Illuminating Serum</item>
+        <item>Rewind Age Control Nectar</item>
+        <item>Eye Smooth</item>
+        <item>30 Second Miracle Instant Perfector</item>
+        <item>Night Haven Overnight Age Control Cream</item>
     </string-array>
 
     <string name="email_label">Email</string>

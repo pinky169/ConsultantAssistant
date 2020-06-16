@@ -12,7 +12,7 @@ android {
         applicationId "pl.consultantassistant"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 27
+        versionCode 29
         versionName "1.0"
         multiDexEnabled true
 
@@ -48,8 +48,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     // Google Play In-App Billing
-    implementation 'com.android.billingclient:billing:2.2.1'
-    implementation 'com.android.billingclient:billing-ktx:2.2.1'
+    implementation 'com.android.billingclient:billing:3.0.0'
+    implementation 'com.android.billingclient:billing-ktx:3.0.0'
 
     // MultiDex
     implementation 'com.android.support:multidex:1.0.3'

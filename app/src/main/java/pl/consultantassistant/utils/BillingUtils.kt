@@ -44,7 +44,7 @@ class BillingUtils(private val activity: Activity) : PurchasesUpdatedListener {
 
                     // The BillingClient is ready. You can query purchases here.
                     val purchasesResult = billingClient.queryPurchases(BillingClient.SkuType.SUBS)
-                    val purchasesList = purchasesResult.purchasesList
+                    val purchasesList = purchasesResult.purchasesList!!
 
                     if (purchasesList.isNotEmpty()) {
 
@@ -71,13 +71,13 @@ class BillingUtils(private val activity: Activity) : PurchasesUpdatedListener {
                             .build()
 
                         billingClient.querySkuDetailsAsync(params) { billingResultCode, skuDetailsList ->
-                            if (billingResultCode.responseCode == BillingClient.BillingResponseCode.OK && skuDetailsList.isNotEmpty()) {
+                            if (billingResultCode.responseCode == BillingClient.BillingResponseCode.OK && skuDetailsList!!.isNotEmpty()) {
 
                                 for (skuDetails in skuDetailsList) {
                                     val flowParams = BillingFlowParams
-                                        .newBuilder()
-                                        .setSkuDetails(skuDetails)
-                                        .build()
+                                            .newBuilder()
+                                            .setSkuDetails(skuDetails)
+                                            .build()
                                     billingClient.launchBillingFlow(activity, flowParams)
                                 }
                             }

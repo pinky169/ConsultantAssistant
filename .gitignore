@@ -47,3 +47,5 @@ output.json
 obj/
 .externalNativeBuild
 /app/google-services.json
+
+__screenshots__/
