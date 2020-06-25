@@ -51,7 +51,7 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     // ArrayList with current products
     // used to select those products in chip group
-    private var currentProducts: ArrayList<Product> = arrayListOf()
+    private var currentProducts: ArrayList<String> = arrayListOf()
 
     // List with selected products in chip group
     // which will be send to database
@@ -62,11 +62,7 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_products, container, false)
     }
 
@@ -86,7 +82,7 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
             showOrHideProducts(productList)
             recyclerAdapter.submitList(productList)
             currentProducts.clear()
-            currentProducts.addAll(productList)
+            productList.forEach { product -> currentProducts.add(product.productName) }
         })
     }
 
@@ -129,16 +125,16 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
-    private fun showOrHideProducts(products: List<Product>) {
+    private fun showOrHideProducts(products: List<Product>?) {
 
-        if (products.isNotEmpty()) {
-            products_view_switcher.visibility = View.VISIBLE
-            products_empty_view.visibility = View.GONE
-            editingState = EDITING_STATE_DISABLED
-        } else {
+        if (products.isNullOrEmpty()) {
             products_view_switcher.visibility = View.GONE
             products_empty_view.visibility = View.VISIBLE
             editingState = EDITING_STATE_DISABLED_WHEN_VIEW_EMPTY
+        } else {
+            products_view_switcher.visibility = View.VISIBLE
+            products_empty_view.visibility = View.GONE
+            editingState = EDITING_STATE_DISABLED
         }
 
         // Update menu
@@ -195,7 +191,7 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     val currentChipId = currentChip.id
 
                     for (customerProduct in currentProducts) {
-                        if (currentChip.text.toString() == customerProduct.productName) {
+                        if (currentChip.text.toString() == customerProduct) {
                             chipGroup.check(currentChipId)
                         }
                     }
@@ -216,16 +212,28 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
         requireActivity().invalidateOptionsMenu()
     }
 
+    private fun hasSelectionChanged() : Boolean {
+        return if (productsToSubmit.size != currentProducts.size)
+            true
+        else return productsToSubmit != currentProducts
+    }
+
     private fun saveProducts() {
 
-        viewModel.deleteCustomerProducts(partnerID, customerID, productsType).invokeOnCompletion {
-            for (product in productsToSubmit) {
+        productsToSubmit.sort()
+        currentProducts.sort()
 
-                val newProductReference = viewModel.getCustomerProductsReference(partnerID, customerID, productsType).push()
-                val newProductKey = newProductReference.key!!
-                val newProduct = Product(customerID, newProductKey, product)
+        if (hasSelectionChanged()) {
 
-                viewModel.insertProduct(partnerID, newProduct, productsType)
+            viewModel.deleteCustomerProducts(partnerID, customerID, productsType).invokeOnCompletion {
+                for (product in productsToSubmit) {
+
+                    val newProductReference = viewModel.getCustomerProductsReference(partnerID, customerID, productsType).push()
+                    val newProductKey = newProductReference.key!!
+                    val newProduct = Product(customerID, newProductKey, product)
+
+                    viewModel.insertProduct(partnerID, newProduct, productsType)
+                }
             }
         }
     }

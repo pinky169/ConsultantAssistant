@@ -3,12 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         android:text="@string/hair_color"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
@@ -20,13 +24,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:entries="@array/hair_colors"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
         android:spinnerMode="dropdown"
         tools:listitem="@layout/support_simple_spinner_dropdown_item" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@android:color/darker_gray" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         android:text="@string/dyed_hair"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
@@ -38,13 +52,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:entries="@array/yes_no_array"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
         android:spinnerMode="dropdown"
         tools:listitem="@layout/support_simple_spinner_dropdown_item" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@android:color/darker_gray" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         android:text="@string/type_of_hair"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
@@ -56,13 +80,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:entries="@array/types_of_hair"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
         android:spinnerMode="dropdown"
         tools:listitem="@layout/support_simple_spinner_dropdown_item" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@android:color/darker_gray" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         android:text="@string/wash_frequency"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
@@ -74,13 +108,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:entries="@array/hair_washing_frequency"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
         android:spinnerMode="dropdown"
         tools:listitem="@layout/support_simple_spinner_dropdown_item" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@android:color/darker_gray" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         android:text="@string/hair_condition"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
@@ -92,13 +136,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:entries="@array/hair_condition"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
         android:spinnerMode="dropdown"
         tools:listitem="@layout/support_simple_spinner_dropdown_item" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@android:color/darker_gray" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         android:text="@string/routine_activities"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
@@ -110,13 +164,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:entries="@array/hair_related_routine"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
         android:spinnerMode="dropdown"
         tools:listitem="@layout/support_simple_spinner_dropdown_item" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@android:color/darker_gray" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         android:text="@string/termo_protection_needed"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
@@ -128,13 +192,24 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:entries="@array/yes_no_array"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
         android:spinnerMode="dropdown"
         tools:listitem="@layout/support_simple_spinner_dropdown_item" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@android:color/darker_gray" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
+        android:labelFor="@id/treatment_details_edit_text"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         android:text="@string/purpose_of_the_treatment"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
@@ -144,12 +219,16 @@
         android:id="@+id/treatment_details_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textCapSentences" />
+        android:inputType="textCapSentences|textMultiLine"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
+        android:labelFor="@id/more_details_edit_text"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         android:text="@string/other_comments"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
@@ -159,6 +238,8 @@
         android:id="@+id/more_details_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textCapSentences" />
+        android:inputType="textCapSentences|textMultiLine"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp" />
 
 </LinearLayout>

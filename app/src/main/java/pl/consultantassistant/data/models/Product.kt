@@ -1,6 +1,6 @@
 package pl.consultantassistant.data.models
 
-class Product(var customerID: String = "", var productID: String = "", var productName: String = "") {
+data class Product(var customerID: String = "", var productID: String = "", var productName: String = "") {
 
     // Used when calling updateChildren
     // which requires Map<String, Any> argument

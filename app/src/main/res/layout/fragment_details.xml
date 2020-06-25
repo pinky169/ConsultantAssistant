@@ -16,8 +16,9 @@
             android:id="@+id/details_view_switcher"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inAnimation="@android:anim/slide_in_left"
             android:measureAllChildren="false"
-            android:padding="8dp">
+            android:outAnimation="@android:anim/slide_out_right">
 
             <include layout="@layout/customer_details_item_layout" />
 

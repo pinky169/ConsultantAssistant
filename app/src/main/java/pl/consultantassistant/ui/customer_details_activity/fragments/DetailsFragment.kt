@@ -18,6 +18,7 @@ class DetailsFragment : Fragment() {
 
     private lateinit var viewModel: CustomerDetailsViewModel
     private var detailsEditingState: String = ""
+    private var customerDetails: CustomerDetails? = null
     private lateinit var partnerID: String
     private lateinit var customerID: String
 
@@ -67,6 +68,8 @@ class DetailsFragment : Fragment() {
                 treatment_details_edit_text.setText(it.purposeOfTreatment)
                 more_details_edit_text.setText(it.moreDetails)
 
+                customerDetails = it.copy()
+
             } ?: run {
 
                 details_view_switcher.visibility = View.GONE
@@ -112,7 +115,7 @@ class DetailsFragment : Fragment() {
         val purposeOfTreatment = treatment_details_edit_text.text.toString()
         val moreDetails = more_details_edit_text.text.toString()
 
-        val customerDetails = CustomerDetails(
+        val updatedDetails = CustomerDetails(
             customerID,
             hairColor,
             hasDyedHair,
@@ -125,8 +128,10 @@ class DetailsFragment : Fragment() {
             moreDetails
         )
 
-        viewModel.insertCustomerDetails(partnerID, customerDetails)
-        Toasty.success(requireContext(), getString(R.string.toast_message_saved), Toast.LENGTH_SHORT).show()
+        if(updatedDetails != customerDetails) {
+            viewModel.insertCustomerDetails(partnerID, updatedDetails)
+            Toasty.success(requireContext(), getString(R.string.toast_message_saved), Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {

@@ -1,6 +1,6 @@
 package pl.consultantassistant.data.models
 
-class Photo(var customerID: String = "", var photoID: String = "", var photoURL: String = "", var photoExtension: String = "", var photoLastModifiedDate: String = "") {
+data class Photo(var customerID: String = "", var photoID: String = "", var photoURL: String = "", var photoExtension: String = "", var photoLastModifiedDate: String = "") {
 
     // Used when calling updateChildren
     // which requires Map<String, Any> argument
