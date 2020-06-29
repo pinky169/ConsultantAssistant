@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +26,7 @@ import org.kodein.di.generic.instance
 import pl.consultantassistant.R
 import pl.consultantassistant.data.firebase.FirebaseQueryLiveData
 import pl.consultantassistant.data.models.Customer
+import pl.consultantassistant.databinding.HomeLayoutBinding
 import pl.consultantassistant.ui.customer_details_activity.CustomerDetailsActivity
 import pl.consultantassistant.ui.home.adapter.CustomersAdapter
 import pl.consultantassistant.ui.home.viewmodel.HomeViewModel
@@ -50,14 +52,19 @@ class HomeActivity : AppCompatActivity(), CustomerItemListener, LoadingListener,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.home_layout)
+
+        viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
+        partnerID = viewModel.partnerID!!
+
+        val binding : HomeLayoutBinding = DataBindingUtil.setContentView(this, R.layout.home_layout)
+        binding.apply {
+            lifecycleOwner = this@HomeActivity
+            viewmodel = viewModel
+        }
 
         setupRecyclerView()
         setupFloatingActionButton()
         FirebaseQueryLiveData.loadingListener = this
-
-        viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
-        partnerID = viewModel.partnerID!!
 
         loadPartner(viewModel)
         loadCustomers(viewModel)
@@ -65,20 +72,12 @@ class HomeActivity : AppCompatActivity(), CustomerItemListener, LoadingListener,
 
     private fun loadPartner(viewModel: HomeViewModel) {
         viewModel.getPartner().observe(this@HomeActivity, Observer {
-            if (it.name.isNotBlank() && it.surname.isNotBlank()) {
-                title = getString(R.string.full_name, it.name, it.surname)
-            }
             getDeviceTokenAndUpload()
         })
     }
 
     private fun loadCustomers(viewModel: HomeViewModel) {
         viewModel.getCustomers().observe(this@HomeActivity, Observer { customers ->
-            if (customers.isEmpty()) {
-                showEmptyView(true)
-            } else {
-                showEmptyView(false)
-            }
             recyclerAdapter.originalList = customers
             recyclerAdapter.submitList(customers)
         })
@@ -91,13 +90,6 @@ class HomeActivity : AppCompatActivity(), CustomerItemListener, LoadingListener,
         val userId = viewModel.partnerID!!
 
         viewModel.insertToken(userId, deviceToken)
-    }
-
-    private fun showEmptyView(boolean: Boolean) {
-        if (boolean)
-            customers_empty_view.visibility = View.VISIBLE
-        else
-            customers_empty_view.visibility = View.GONE
     }
 
     private fun setupFloatingActionButton() {

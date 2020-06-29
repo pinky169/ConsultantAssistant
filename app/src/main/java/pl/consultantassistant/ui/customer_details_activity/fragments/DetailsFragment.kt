@@ -3,20 +3,22 @@ package pl.consultantassistant.ui.customer_details_activity.fragments
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.customer_details_editable_item_layout.*
-import kotlinx.android.synthetic.main.customer_details_item_layout.*
 import kotlinx.android.synthetic.main.fragment_details.*
 import pl.consultantassistant.R
 import pl.consultantassistant.data.models.CustomerDetails
+import pl.consultantassistant.databinding.FragmentDetailsBinding
 import pl.consultantassistant.ui.customer_details_activity.viewmodel.CustomerDetailsViewModel
 
 class DetailsFragment : Fragment() {
 
     private lateinit var viewModel: CustomerDetailsViewModel
+    private lateinit var binding : FragmentDetailsBinding
     private var detailsEditingState: String = ""
     private var customerDetails: CustomerDetails? = null
     private lateinit var partnerID: String
@@ -28,7 +30,13 @@ class DetailsFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_details, container, false)
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_details, container, false)
+        binding.apply {
+            lifecycleOwner = viewLifecycleOwner
+        }
+
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -37,6 +45,7 @@ class DetailsFragment : Fragment() {
         setupListeners()
 
         viewModel = ViewModelProvider(requireActivity()).get(CustomerDetailsViewModel::class.java)
+        binding.viewmodel = viewModel
         viewModel.getPartnerId().observe(viewLifecycleOwner, Observer { partnerID = it })
         viewModel.getCustomerId().observe(viewLifecycleOwner, Observer { customerID = it })
         viewModel.getCustomerDetails().observe(viewLifecycleOwner, Observer { details ->
@@ -44,20 +53,10 @@ class DetailsFragment : Fragment() {
             // Fill views with data
             details?.let {
 
-                details_view_switcher.visibility = View.VISIBLE
-                details_empty_view.visibility = View.GONE
+                // Editing state is disabled by default
                 detailsEditingState = EDITING_STATE_DISABLED
 
-                hair_color.text = it.hairColor
-                dyed_hair.text = it.dyedHair
-                type_of_hair.text = it.typeOfHair
-                washing_frequency.text = it.washingFrequency
-                hair_condition.text = it.hairCondition
-                hair_related_routine_activities.text = it.routineActivities
-                termo_protection_needed.text = it.termoProtection
-                treatment_details_text_view.text = it.purposeOfTreatment
-                more_details_text_view.text = it.moreDetails
-
+                // Set customer details on spinners
                 hair_color_spinner.setSelection(resources.getStringArray(R.array.hair_colors).indexOf(it.hairColor))
                 dyed_hair_spinner.setSelection(resources.getStringArray(R.array.yes_no_array).indexOf(it.dyedHair))
                 type_of_hair_spinner.setSelection(resources.getStringArray(R.array.types_of_hair).indexOf(it.typeOfHair))
@@ -65,17 +64,13 @@ class DetailsFragment : Fragment() {
                 hair_condition_spinner.setSelection(resources.getStringArray(R.array.hair_condition).indexOf(it.hairCondition))
                 hair_related_routine_spinner.setSelection(resources.getStringArray(R.array.hair_related_routine).indexOf(it.routineActivities))
                 termo_protection_spinner.setSelection(resources.getStringArray(R.array.yes_no_array).indexOf(it.termoProtection))
-                treatment_details_edit_text.setText(it.purposeOfTreatment)
-                more_details_edit_text.setText(it.moreDetails)
 
                 customerDetails = it.copy()
 
             } ?: run {
 
-                details_view_switcher.visibility = View.GONE
-                details_empty_view.visibility = View.VISIBLE
+                // View is empty, editing is disabled here as well
                 detailsEditingState = EDITING_STATE_DISABLED_WHEN_VIEW_EMPTY
-
             }
 
             // Update menu

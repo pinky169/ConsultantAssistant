@@ -1,46 +1,65 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fragment_details"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:bind="http://schemas.android.com/tools">
 
-    <androidx.core.widget.NestedScrollView
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewmodel"
+            type="pl.consultantassistant.ui.customer_details_activity.viewmodel.CustomerDetailsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_details"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <ViewSwitcher
-            android:id="@+id/details_view_switcher"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ViewSwitcher
+                android:id="@+id/details_view_switcher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inAnimation="@android:anim/slide_in_left"
+                android:measureAllChildren="false"
+                android:outAnimation="@android:anim/slide_out_right"
+                android:visibility="@{viewmodel.customerDetails != null ? View.VISIBLE : View.GONE}">
+
+                <include
+                    layout="@layout/customer_details_item_layout"
+                    bind:viewmodel="@{viewmodel}" />
+
+                <include
+                    layout="@layout/customer_details_editable_item_layout"
+                    bind:viewmodel="@{viewmodel}" />
+
+            </ViewSwitcher>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/details_empty_view"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inAnimation="@android:anim/slide_in_left"
-            android:measureAllChildren="false"
-            android:outAnimation="@android:anim/slide_out_right">
+            android:drawableTop="@drawable/ic_new_folder_50dp"
+            android:gravity="center"
+            android:padding="30dp"
+            android:text="@string/section_details_empty_view_text"
+            android:textAlignment="center"
+            android:visibility="@{viewmodel.customerDetails != null ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <include layout="@layout/customer_details_item_layout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <include layout="@layout/customer_details_editable_item_layout" />
-
-        </ViewSwitcher>
-
-    </androidx.core.widget.NestedScrollView>
-
-    <TextView
-        android:id="@+id/details_empty_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableTop="@drawable/ic_new_folder_50dp"
-        android:gravity="center"
-        android:padding="30dp"
-        android:text="@string/section_details_empty_view_text"
-        android:textAlignment="center"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

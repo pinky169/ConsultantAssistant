@@ -1,227 +1,245 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="viewmodel"
+            type="pl.consultantassistant.ui.customer_details_activity.viewmodel.CustomerDetailsViewModel" />
+    </data>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:text="@string/hair_color"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        android:textStyle="bold" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/hair_color"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:text="@string/hair_color"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
-        android:background="@android:color/darker_gray" />
+        <TextView
+            android:id="@+id/hair_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingStart="12dp"
+            android:text="@{viewmodel.customerDetails.hairColor}"
+            android:paddingEnd="12dp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:text="@string/dyed_hair"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        android:textStyle="bold" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@android:color/darker_gray" />
 
-    <TextView
-        android:id="@+id/dyed_hair"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:text="@string/dyed_hair"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
-        android:background="@android:color/darker_gray" />
+        <TextView
+            android:id="@+id/dyed_hair"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingStart="12dp"
+            android:text="@{viewmodel.customerDetails.dyedHair}"
+            android:paddingEnd="12dp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:text="@string/type_of_hair"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        android:textStyle="bold" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@android:color/darker_gray" />
 
-    <TextView
-        android:id="@+id/type_of_hair"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:text="@string/type_of_hair"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
-        android:background="@android:color/darker_gray" />
+        <TextView
+            android:id="@+id/type_of_hair"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{viewmodel.customerDetails.typeOfHair}"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:text="@string/wash_frequency"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        android:textStyle="bold" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@android:color/darker_gray" />
 
-    <TextView
-        android:id="@+id/washing_frequency"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:text="@string/wash_frequency"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
-        android:background="@android:color/darker_gray" />
+        <TextView
+            android:id="@+id/washing_frequency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewmodel.customerDetails.washingFrequency}"
+            android:layout_marginTop="8dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:text="@string/hair_condition"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        android:textStyle="bold" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@android:color/darker_gray" />
 
-    <TextView
-        android:id="@+id/hair_condition"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:text="@string/hair_condition"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
-        android:background="@android:color/darker_gray" />
+        <TextView
+            android:id="@+id/hair_condition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{viewmodel.customerDetails.hairCondition}"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:text="@string/routine_activities"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        android:textStyle="bold" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@android:color/darker_gray" />
 
-    <TextView
-        android:id="@+id/hair_related_routine_activities"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:text="@string/routine_activities"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
-        android:background="@android:color/darker_gray" />
+        <TextView
+            android:id="@+id/hair_related_routine_activities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{viewmodel.customerDetails.routineActivities}"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:text="@string/termo_protection_needed"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        android:textStyle="bold" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@android:color/darker_gray" />
 
-    <TextView
-        android:id="@+id/termo_protection_needed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:text="@string/termo_protection_needed"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
-        android:background="@android:color/darker_gray" />
+        <TextView
+            android:id="@+id/termo_protection_needed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{viewmodel.customerDetails.termoProtection}"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:text="@string/purpose_of_the_treatment"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        android:textStyle="bold" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@android:color/darker_gray" />
 
-    <TextView
-        android:id="@+id/treatment_details_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:text="@string/purpose_of_the_treatment"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
-        android:background="@android:color/darker_gray" />
+        <TextView
+            android:id="@+id/treatment_details_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{viewmodel.customerDetails.purposeOfTreatment}"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:text="@string/other_comments"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        android:textStyle="bold" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@android:color/darker_gray" />
 
-    <TextView
-        android:id="@+id/more_details_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="12dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:text="@string/other_comments"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/more_details_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{viewmodel.customerDetails.moreDetails}"
+            android:layout_marginBottom="12dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
+
+    </LinearLayout>
+
+</layout>
