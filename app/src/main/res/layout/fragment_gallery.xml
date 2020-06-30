@@ -1,43 +1,55 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_gallery"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/gallery_recycler_view"
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="viewmodel"
+            type="pl.consultantassistant.ui.customer_details_activity.viewmodel.CustomerDetailsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_gallery"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/gallery_item_layout" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/gallery_empty_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableTop="@drawable/ic_add_a_photo_50dp"
-        android:gravity="center"
-        android:padding="50dp"
-        android:text="@string/section_gallery_empty_view_text"
-        android:textAlignment="center"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/gallery_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/gallery_item_layout" />
 
-    <ProgressBar
-        android:id="@+id/gallery_progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/gallery_empty_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/ic_add_a_photo_50dp"
+            android:gravity="center"
+            android:padding="50dp"
+            android:text="@string/section_gallery_empty_view_text"
+            android:textAlignment="center"
+            android:visibility="@{viewmodel.customerPhotos.isEmpty() ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ProgressBar
+            android:id="@+id/gallery_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

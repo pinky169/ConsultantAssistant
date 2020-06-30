@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.AdapterView
 import androidx.core.view.children
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +16,7 @@ import com.google.android.material.chip.ChipGroup
 import kotlinx.android.synthetic.main.fragment_products.*
 import pl.consultantassistant.R
 import pl.consultantassistant.data.models.Product
+import pl.consultantassistant.databinding.FragmentProductsBinding
 import pl.consultantassistant.ui.customer_details_activity.adapter.ProductsAdapter
 import pl.consultantassistant.ui.customer_details_activity.fragments.DetailsFragment.Companion.EDITING_STATE_DISABLED
 import pl.consultantassistant.ui.customer_details_activity.fragments.DetailsFragment.Companion.EDITING_STATE_DISABLED_WHEN_VIEW_EMPTY
@@ -26,6 +28,9 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     // ViewModel
     private lateinit var viewModel: CustomerDetailsViewModel
+
+    // Data binding for this fragment
+    private lateinit var binding : FragmentProductsBinding
 
     // Products RecyclerView Adapter
     private lateinit var recyclerAdapter: ProductsAdapter
@@ -44,7 +49,7 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     // State with information if editing
     // the list of customer products is enabled or not
-    private var editingState: String = EDITING_STATE_DISABLED
+    private var editingState: String = ""
 
     // Array of strings with names od products
     private var allProductsArray: ArrayList<Array<String>> = arrayListOf()
@@ -63,7 +68,13 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_products, container, false)
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_products, container, false)
+        binding.apply {
+            lifecycleOwner = viewLifecycleOwner
+        }
+
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -75,11 +86,12 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
         loadAllPossibleProducts()
 
         viewModel = ViewModelProvider(requireActivity()).get(CustomerDetailsViewModel::class.java)
+        binding.viewmodel = viewModel
         viewModel.getPartnerId().observe(viewLifecycleOwner, Observer { partnerID = it })
         viewModel.getCustomerId().observe(viewLifecycleOwner, Observer { customerID = it })
         viewModel.getProductsType().observe(viewLifecycleOwner, Observer { productsType = it })
         viewModel.getCustomerProducts().observe(viewLifecycleOwner, Observer { productList ->
-            showOrHideProducts(productList)
+            setEditingState(productList)
             recyclerAdapter.submitList(productList)
             currentProducts.clear()
             productList.forEach { product -> currentProducts.add(product.productName) }
@@ -125,19 +137,14 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
-    private fun showOrHideProducts(products: List<Product>?) {
+    private fun setEditingState(products: List<Product>) {
 
-        if (products.isNullOrEmpty()) {
-            products_view_switcher.visibility = View.GONE
-            products_empty_view.visibility = View.VISIBLE
-            editingState = EDITING_STATE_DISABLED_WHEN_VIEW_EMPTY
-        } else {
-            products_view_switcher.visibility = View.VISIBLE
-            products_empty_view.visibility = View.GONE
-            editingState = EDITING_STATE_DISABLED
-        }
+        editingState = if (products.isEmpty())
+            EDITING_STATE_DISABLED_WHEN_VIEW_EMPTY
+        else
+            EDITING_STATE_DISABLED
 
-        // Update menu
+        // Update menu - calls onPrepareOptionsMenu()
         requireActivity().invalidateOptionsMenu()
 
         // Always show customer products first

@@ -10,6 +10,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat.checkSelfPermission
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -18,6 +19,7 @@ import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.fragment_gallery.*
 import pl.consultantassistant.R
 import pl.consultantassistant.data.models.Photo
+import pl.consultantassistant.databinding.FragmentGalleryBinding
 import pl.consultantassistant.ui.customer_details_activity.adapter.PhotosAdapter
 import pl.consultantassistant.ui.customer_details_activity.viewmodel.CustomerDetailsViewModel
 import pl.consultantassistant.utils.GalleryItemListener
@@ -30,6 +32,9 @@ class GalleryFragment : Fragment(), GalleryItemListener {
 
     // ViewModel
     private lateinit var viewModel: CustomerDetailsViewModel
+
+    // Data binding for this fragment
+    private lateinit var binding : FragmentGalleryBinding
 
     // RecyclerView Adapter
     private lateinit var galleryRecyclerViewAdapter: PhotosAdapter
@@ -49,7 +54,13 @@ class GalleryFragment : Fragment(), GalleryItemListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_gallery, container, false)
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_gallery, container, false)
+        binding.apply {
+            lifecycleOwner = viewLifecycleOwner
+        }
+
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -59,10 +70,11 @@ class GalleryFragment : Fragment(), GalleryItemListener {
         setupGalleryRecyclerView()
 
         viewModel = ViewModelProvider(requireActivity()).get(CustomerDetailsViewModel::class.java)
+        binding.viewmodel = viewModel
         viewModel.getPartnerId().observe(viewLifecycleOwner, Observer { partnerID = it })
         viewModel.getCustomerId().observe(viewLifecycleOwner, Observer { customerID = it })
         viewModel.getCustomerPhotos().observe(viewLifecycleOwner, Observer { photos ->
-            showOrHidePhotos(photos)
+            setEmptyState(photos)
             galleryRecyclerViewAdapter.submitList(photos)
         })
     }
@@ -208,17 +220,9 @@ class GalleryFragment : Fragment(), GalleryItemListener {
         gallery_empty_view.setOnClickListener { openFileChooser() }
     }
 
-    private fun showOrHidePhotos(photos: List<Photo>) {
+    private fun setEmptyState(photos: List<Photo>) {
 
-        if (photos.isNotEmpty()) {
-            gallery_recycler_view.visibility = View.VISIBLE
-            gallery_empty_view.visibility = View.GONE
-            isGalleryEmpty = false
-        } else {
-            gallery_recycler_view.visibility = View.GONE
-            gallery_empty_view.visibility = View.VISIBLE
-            isGalleryEmpty = true
-        }
+        isGalleryEmpty = photos.isEmpty()
 
         // Refresh menu depending on whether the list is empty or not
         requireActivity().invalidateOptionsMenu()
