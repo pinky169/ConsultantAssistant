@@ -18,13 +18,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="8dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:labelFor="@id/name_edit_text"
+                android:textAllCaps="true"
                 android:text="@string/name_edit_text_label_text"
                 android:textColor="@android:color/black"
                 android:textStyle="bold" />
@@ -41,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:labelFor="@id/surname_edit_text"
+                android:textAllCaps="true"
                 android:text="@string/surname_edit_text_label_text"
                 android:textColor="@android:color/black"
                 android:textStyle="bold" />
@@ -58,6 +60,7 @@
                 android:layout_marginTop="8dp"
                 android:labelFor="@id/name_edit_text"
                 android:text="@string/email_label_text"
+                android:textAllCaps="true"
                 android:textColor="@android:color/black"
                 android:textStyle="bold" />
 
@@ -73,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:labelFor="@id/customer_level_spinner"
+                android:textAllCaps="true"
                 android:text="@string/customer_level_spinner_label_text"
                 android:textColor="@android:color/black"
                 android:textStyle="bold" />

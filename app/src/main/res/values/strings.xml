@@ -267,5 +267,8 @@
     <string name="alert_dialog_delete_customer_title">Are you sure you want to delete %1$s %2$s?</string>
     <string name="alert_dialog_button_positive_text">Yes</string>
     <string name="alert_dialog_button_negative_text">No</string>
+    <string name="menu_sort_title">Sort the list</string>
+    <string name="menu_action_sort_alphabetically_title">Alphabetically</string>
+    <string name="menu_action_sort_by_customer_level_title">By customer level</string>
 
 </resources>

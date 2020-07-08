@@ -13,19 +13,23 @@ import pl.consultantassistant.data.repository.Repository
 
 class HomeViewModel(application: Application, private val repository: Repository) : AndroidViewModel(application) {
 
+    private val sortingOrder = MutableLiveData<String>()
+
     val partnerID by lazy { repository.currentUserId() }
     private val partnerLiveData: LiveData<Partner>
     private val customersLiveData: LiveData<List<Customer>>
+    private val customersDataSnapshotLiveData: LiveData<DataSnapshot>
 
     private val partnerDataSnapshotLiveData: LiveData<DataSnapshot> by lazy {
         FirebaseQueryLiveData(repository.getPartnerReference(partnerID!!))
     }
 
-    private val customersDataSnapshotLiveData: LiveData<DataSnapshot> by lazy {
-        FirebaseQueryLiveData(repository.getSpecificPartnerCustomersReference(partnerID!!))
-    }
-
     init {
+
+        customersDataSnapshotLiveData = Transformations.switchMap(sortingOrder) {
+            FirebaseQueryLiveData(repository.getSpecificPartnerCustomersReference(partnerID!!).orderByChild(it))
+        }
+
         partnerLiveData = Transformations.map(partnerDataSnapshotLiveData) { PartnerDeserializer().apply(it) }
         customersLiveData = Transformations.map(customersDataSnapshotLiveData) { CustomersDeserializer().apply(it) }
     }
@@ -91,11 +95,12 @@ class HomeViewModel(application: Application, private val repository: Repository
         }
     }
 
-    inner class QueryMediatorLiveData<A, B>(a: LiveData<A>, b: LiveData<B>) :
-        MediatorLiveData<Pair<A?, B?>>() {
-        init {
-            addSource(a) { value = it to b.value }
-            addSource(b) { value = a.value to it }
-        }
+    /**
+     * SORTING OF FIREBASE QUERY - CUSTOMERS
+     * ORDER_ALPHABETICALLY - order a list alphabetically
+     * ORDER_USER_LEVEL - order a list by user level
+     */
+    fun setSortingOrder(order: String) {
+        sortingOrder.value = order
     }
 }

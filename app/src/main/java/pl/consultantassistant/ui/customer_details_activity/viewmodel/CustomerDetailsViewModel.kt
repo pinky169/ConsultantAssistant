@@ -32,6 +32,7 @@ class CustomerDetailsViewModel(application: Application, private val repository:
 
         detailsLiveData = Transformations.map(detailsDataSnapshotLiveData) { DetailsDeserializer().apply(it) }
 
+        // Init products type live data default value
         setProductsType(0)
 
         productsDataSnapshotLiveData = Transformations.switchMap(CustomerMediatorLiveData(partnerID, customerID, productsType)) {
@@ -90,6 +91,11 @@ class CustomerDetailsViewModel(application: Application, private val repository:
     *       Customer products
     * **************************/
 
+    /**
+     * 0 - customer products
+     * 1 - proposed products
+     * 2 - products samples
+     */
     fun setProductsType(type: Int) {
         productsType.value = type
     }

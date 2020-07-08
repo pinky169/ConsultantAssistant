@@ -267,5 +267,8 @@
     <string name="alert_dialog_delete_customer_title">Czy na pewno chcesz usunąć %1$s %2$s?</string>
     <string name="alert_dialog_button_positive_text">Tak</string>
     <string name="alert_dialog_button_negative_text">Nie</string>
+    <string name="menu_sort_title">Sortuj listę</string>
+    <string name="menu_action_sort_alphabetically_title">Alfabetycznie</string>
+    <string name="menu_action_sort_by_customer_level_title">Po poziomie klienta</string>
 
 </resources>

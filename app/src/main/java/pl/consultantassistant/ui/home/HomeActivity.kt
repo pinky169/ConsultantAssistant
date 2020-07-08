@@ -48,6 +48,8 @@ class HomeActivity : AppCompatActivity(), CustomerItemListener, LoadingListener,
     companion object {
         const val CREATE_NEW_CUSTOMER_REQUEST_CODE = 777
         const val UPDATE_CUSTOMER_REQUEST_CODE = 888
+        const val ORDER_ALPHABETICALLY = "surname"
+        const val ORDER_USER_LEVEL = "userLevel"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,6 +68,7 @@ class HomeActivity : AppCompatActivity(), CustomerItemListener, LoadingListener,
         setupFloatingActionButton()
         FirebaseQueryLiveData.loadingListener = this
 
+        viewModel.setSortingOrder(getSortingOrder()!!)
         loadPartner(viewModel)
         loadCustomers(viewModel)
     }
@@ -232,9 +235,16 @@ class HomeActivity : AppCompatActivity(), CustomerItemListener, LoadingListener,
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
-        menuInflater.inflate(R.menu.home_menu, menu)
+        menuInflater.inflate(R.menu.home_menu, menu!!)
 
-        val searchItem: MenuItem = menu!!.findItem(R.id.action_search)
+        val sortingOrder = getSortingOrder()
+
+        if (sortingOrder.equals(ORDER_USER_LEVEL))
+            menu.findItem(R.id.menu_action_sort_by_customer_level).isChecked = true
+        else if (sortingOrder.equals(ORDER_ALPHABETICALLY))
+            menu.findItem(R.id.menu_action_sort_alphabetically).isChecked = true
+
+        val searchItem: MenuItem = menu.findItem(R.id.menu_search)
         val searchView = searchItem.actionView as SearchView
         searchView.maxWidth = Int.MAX_VALUE
 
@@ -261,16 +271,37 @@ class HomeActivity : AppCompatActivity(), CustomerItemListener, LoadingListener,
                 viewModel.logout()
                 startLoginActivity()
                 finish()
-                Toasty.info(this, getString(R.string.log_out_confirmation), Toast.LENGTH_LONG)
-                    .show()
+                Toasty.info(this, getString(R.string.log_out_confirmation), Toast.LENGTH_LONG).show()
             }
 
             R.id.menu_notification -> {
                 openCalendarNewEvent()
             }
+
+            R.id.menu_action_sort_alphabetically -> {
+                item.isChecked = !item.isChecked
+                viewModel.setSortingOrder(ORDER_ALPHABETICALLY)
+                saveSortingOrder(ORDER_ALPHABETICALLY)
+            }
+
+            R.id.menu_action_sort_by_customer_level -> {
+                item.isChecked = !item.isChecked
+                viewModel.setSortingOrder(ORDER_USER_LEVEL)
+                saveSortingOrder(ORDER_USER_LEVEL)
+            }
         }
 
         return true
+    }
+
+    private fun saveSortingOrder(order: String?) {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this@HomeActivity)
+        prefs.edit().putString("SORTING_ORDER", order).apply()
+    }
+
+    private fun getSortingOrder(): String? {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this@HomeActivity)
+        return prefs.getString("SORTING_ORDER", ORDER_ALPHABETICALLY)
     }
 
     private fun openCalendarNewEvent() {
