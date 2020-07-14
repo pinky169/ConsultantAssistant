@@ -81,8 +81,7 @@ class GalleryFragment : Fragment(), GalleryItemListener {
 
     private fun setupGalleryRecyclerView() {
 
-        galleryRecyclerViewAdapter = PhotosAdapter()
-        galleryRecyclerViewAdapter.itemListener = this
+        galleryRecyclerViewAdapter = PhotosAdapter(this)
         val recyclerLayoutManager = GridLayoutManager(requireContext(), 3)
 
         gallery_recycler_view.apply {

@@ -145,8 +145,7 @@ class HomeActivity : AppCompatActivity(), CustomerItemListener, LoadingListener,
 
     private fun setupRecyclerView() {
 
-        recyclerAdapter = CustomersAdapter()
-        recyclerAdapter.itemListener = this
+        recyclerAdapter = CustomersAdapter(this)
         val recyclerLayoutManager = LinearLayoutManager(this)
 
         customers_recycler_view.apply {
@@ -182,6 +181,7 @@ class HomeActivity : AppCompatActivity(), CustomerItemListener, LoadingListener,
     }
 
     override fun createPopupMenu(view: View, position: Int, customer: Customer) {
+
         // Creating a popup menu
         val popup = PopupMenu(view.context, view)
 

@@ -17,18 +17,14 @@ class HomeViewModel(application: Application, private val repository: Repository
 
     val partnerID by lazy { repository.currentUserId() }
     private val partnerLiveData: LiveData<Partner>
+    private val partnerDataSnapshotLiveData: LiveData<DataSnapshot>
     private val customersLiveData: LiveData<List<Customer>>
     private val customersDataSnapshotLiveData: LiveData<DataSnapshot>
 
-    private val partnerDataSnapshotLiveData: LiveData<DataSnapshot> by lazy {
-        FirebaseQueryLiveData(repository.getPartnerReference(partnerID!!))
-    }
-
     init {
 
-        customersDataSnapshotLiveData = Transformations.switchMap(sortingOrder) {
-            FirebaseQueryLiveData(repository.getSpecificPartnerCustomersReference(partnerID!!).orderByChild(it))
-        }
+        partnerDataSnapshotLiveData = FirebaseQueryLiveData(repository.getPartnerReference(partnerID!!))
+        customersDataSnapshotLiveData = Transformations.switchMap(sortingOrder) { FirebaseQueryLiveData(repository.getSpecificPartnerCustomersReference(partnerID!!).orderByChild(it)) }
 
         partnerLiveData = Transformations.map(partnerDataSnapshotLiveData) { PartnerDeserializer().apply(it) }
         customersLiveData = Transformations.map(customersDataSnapshotLiveData) { CustomersDeserializer().apply(it) }
