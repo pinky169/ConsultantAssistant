@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.new_customer_layout.*
 import pl.consultantassistant.R
 import pl.consultantassistant.data.models.Customer
+import pl.consultantassistant.utils.setAppTheme
 
 class NewCustomerActivity : AppCompatActivity() {
 
@@ -21,6 +22,7 @@ class NewCustomerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setAppTheme()
         setContentView(R.layout.new_customer_layout)
 
         setupViews()

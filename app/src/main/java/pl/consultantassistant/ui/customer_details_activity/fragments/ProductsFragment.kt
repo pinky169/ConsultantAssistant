@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import kotlinx.android.synthetic.main.fragment_products.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import pl.consultantassistant.R
 import pl.consultantassistant.data.models.Product
 import pl.consultantassistant.databinding.FragmentProductsBinding
@@ -114,26 +117,30 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
         for (productsArray in allProductsArray) {
 
             val chipGroup = ChipGroup(requireContext())
-            val color: Int = generateRandomColor()
 
-            for (product in productsArray) {
-                val chip = Chip(requireContext())
-                chip.text = product
-                chip.chipBackgroundColor = ColorStateList.valueOf(color)
-                chip.isAllCaps = true
-                chip.isCheckable = true
-                chip.setOnCheckedChangeListener { button, isChecked ->
-                    if (isChecked) {
-                        productsToSubmit.add(button.text.toString())
-                    } else {
-                        productsToSubmit.remove(button.text.toString())
+            GlobalScope.launch(Dispatchers.Main) {
+
+                val color: Int = generateRandomColor()
+
+                for (product in productsArray) {
+                    val chip = Chip(requireContext())
+                    chip.text = product
+                    chip.chipBackgroundColor = ColorStateList.valueOf(color)
+                    chip.isAllCaps = true
+                    chip.isCheckable = true
+                    chip.setOnCheckedChangeListener { button, isChecked ->
+                        if (isChecked) {
+                            productsToSubmit.add(button.text.toString())
+                        } else {
+                            productsToSubmit.remove(button.text.toString())
+                        }
                     }
+
+                    chipGroup.addView(chip)
                 }
 
-                chipGroup.addView(chip)
+                all_products_view.addView(chipGroup)
             }
-
-            all_products_view.addView(chipGroup)
         }
     }
 
@@ -281,7 +288,7 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val random = Random()
 
         // This is the base color which will be mixed with the generated one
-        val baseColor = Color.WHITE
+        val baseColor = Color.GRAY
 
         val baseRed = Color.red(baseColor)
         val baseGreen = Color.green(baseColor)

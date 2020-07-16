@@ -1,28 +1,125 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!-- Base application theme Light theme / Day Mode. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="colorError">@color/colorError</item>
+        <item name="colorSurface">@color/cardBackgroundColor</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="colorOnBackground">@color/colorOnBackground</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="colorOnError">@color/colorOnError</item>
+        <item name="android:textColor">@color/colorOnSurface</item>
+        <item name="android:textColorPrimary">@color/colorOnSurface</item>
+        <item name="android:textColorSecondary">@color/colorOnSurface</item>
         <item name="android:windowBackground">@color/backgroundColor</item>
+        <item name="android:textColorHint">@color/hintTextColor</item>
+        <item name="android:popupMenuStyle">@style/AppTheme.PopupMenu</item>
+        <item name="bottomNavigationIconTintColor">@color/colorPrimary</item>
+        <item name="bottomNavigationIconSelectedTintColor">@color/bottomNavigationIconSelectedTintColor</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog.Day</item>
     </style>
 
-    <style name="MaterialAppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/backgroundColor</item>
+    <!--    Dark theme / Night mode-->
+    <style name="NightMode" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimaryNight</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkNight</item>
+        <item name="colorPrimaryVariant">@color/colorSurface</item>
+        <item name="colorAccent">@color/colorAccentNight</item>
+        <item name="colorSecondary">@color/colorAccentNight</item>
+        <item name="colorError">@color/colorErrorNight</item>
+        <item name="colorSurface">@color/cardBackgroundColorNight</item>
+        <item name="colorOnPrimary">@color/colorOnPrimaryNight</item>
+        <item name="colorOnSecondary">@color/colorOnSecondaryNight</item>
+        <item name="colorOnBackground">@color/colorOnBackgroundNight</item>
+        <item name="colorOnSurface">@color/colorOnSurfaceNight</item>
+        <item name="colorOnError">@color/colorOnError</item>
+        <item name="android:textColor">@color/colorOnSurfaceNight</item>
+        <item name="android:textColorPrimary">@color/colorOnSurfaceNight</item>
+        <item name="android:textColorSecondary">@color/colorOnSurfaceNight</item>
+        <item name="android:windowBackground">@color/colorSurfaceNight</item>
+        <item name="android:textColorHint">@color/hintTextColor</item>
+        <item name="android:popupMenuStyle">@style/NightMode.PopupMenu</item>
+        <item name="bottomNavigationIconTintColor">@color/colorPrimaryNight</item>
+        <item name="bottomNavigationIconSelectedTintColor">@color/bottomNavigationIconSelectedTintColorNight</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog.Night</item>
     </style>
 
-    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme.NoActionBar" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/black</item>
         <item name="android:windowTranslucentStatus">true</item>
+        <item name="colorPrimary">@color/colorPrimaryNight</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkNight</item>
+        <item name="colorAccent">@color/colorAccentNight</item>
+    </style>
+
+    <style name="AppTheme.PopupMenu" parent="@android:style/Widget.PopupMenu">
+        <item name="android:popupBackground">@color/colorAccent</item>
+    </style>
+
+    <style name="NightMode.PopupMenu" parent="@android:style/Widget.PopupMenu">
+        <item name="android:popupBackground">@color/colorAccentNight</item>
+    </style>
+
+    <style name="ThemeOverlay.App.MaterialAlertDialog.Day" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="alertDialogStyle">@style/MaterialAlertDialog.App</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.App.Title.Text.Day</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.App.Button.Day</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.App.Button.Day</item>
+    </style>
+
+    <style name="ThemeOverlay.App.MaterialAlertDialog.Night" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorPrimary">@color/colorPrimaryNight</item>
+        <item name="colorSecondary">@color/colorAccentNight</item>
+        <item name="colorSurface">@color/colorSurfaceNight</item>
+        <item name="colorOnSurface">@color/colorOnSurfaceNight</item>
+        <item name="alertDialogStyle">@style/MaterialAlertDialog.App</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.App.Title.Text.Night</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.App.Button.Night</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.App.Button.Night</item>
+    </style>
+
+    <style name="MaterialAlertDialog.App" parent="MaterialAlertDialog.MaterialComponents">
+        <item name="shapeAppearance">@style/ShapeAppearance.App.MediumComponent</item>
+    </style>
+
+    <style name="MaterialAlertDialog.App.Title.Text.Day" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textColor">@color/colorOnSurface</item>
+    </style>
+
+    <style name="MaterialAlertDialog.App.Title.Text.Night" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textColor">@color/colorOnSurfaceNight</item>
+    </style>
+
+    <style name="Widget.App.Button.Day" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>
+        <item name="android:textColor">@color/colorOnSurface</item>
+    </style>
+
+    <style name="Widget.App.Button.Night" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>
+        <item name="android:textColor">@color/colorOnSurfaceNight</item>
+    </style>
+
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">4dp</item>
     </style>
 
 </resources>

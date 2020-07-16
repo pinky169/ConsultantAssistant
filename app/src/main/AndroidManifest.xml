@@ -35,7 +35,6 @@
             android:parentActivityName="pl.consultantassistant.ui.home.HomeActivity"/>
         <activity
             android:name="pl.consultantassistant.ui.customer_details_activity.CustomerDetailsActivity"
-            android:theme="@style/MaterialAppTheme"
             android:parentActivityName="pl.consultantassistant.ui.home.HomeActivity"/>
 
         <service

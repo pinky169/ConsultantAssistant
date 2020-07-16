@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="colorError">@color/colorError</item>
+        <item name="colorSurface">@color/cardBackgroundColor</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="colorOnBackground">@color/colorOnBackground</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="colorOnError">@color/colorOnError</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textColorPrimary">?attr/colorOnSurface</item>
+        <item name="android:textColorSecondary">?attr/colorOnSurface</item>
+        <item name="android:windowBackground">@color/backgroundColor</item>
+        <item name="android:textColorHint">@color/hintTextColor</item>
+        <item name="android:popupMenuStyle">@style/AppTheme.PopupMenu</item>
+        <item name="bottomNavigationIconTintColor">@color/colorPrimary</item>
+        <item name="bottomNavigationIconSelectedTintColor">@color/bottomNavigationIconSelectedTintColor</item>
+        <item name="android:textViewStyle">@style/AppTheme.TextView.WithDrawable</item>
+    </style>
+
+    <style name="NightMode" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimaryNight</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkNight</item>
+        <item name="colorPrimaryVariant">@color/colorSurface</item>
+        <item name="colorAccent">@color/colorAccentNight</item>
+        <item name="colorSecondary">@color/colorAccentNight</item>
+        <item name="colorError">@color/colorErrorNight</item>
+        <item name="colorSurface">@color/cardBackgroundColorNight</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondaryNight</item>
+        <item name="colorOnBackground">@color/colorOnBackgroundNight</item>
+        <item name="colorOnSurface">@color/colorOnSurfaceNight</item>
+        <item name="colorOnError">@color/colorOnError</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textColorPrimary">?attr/colorOnSurface</item>
+        <item name="android:textColorSecondary">?attr/colorOnSurface</item>
+        <item name="android:windowBackground">@color/colorSurfaceNight</item>
+        <item name="android:textColorHint">@color/hintTextColor</item>
+        <item name="android:popupMenuStyle">@style/NightMode.PopupMenu</item>
+        <item name="bottomNavigationIconTintColor">@color/colorPrimaryNight</item>
+        <item name="bottomNavigationIconSelectedTintColor">@color/bottomNavigationIconSelectedTintColorNight</item>
+        <item name="android:textViewStyle">@style/NightMode.TextView.WithDrawable</item>
+    </style>
+
+    <style name="AppTheme.TextView.WithDrawable" parent="android:Widget.TextView">
+        <item name="android:drawableTint">@color/colorOnSecondary</item>
+    </style>
+
+    <style name="NightMode.TextView.WithDrawable" parent="android:Widget.TextView">
+        <item name="android:drawableTint">@color/colorOnSecondaryNight</item>
+    </style>
+
+
+</resources>

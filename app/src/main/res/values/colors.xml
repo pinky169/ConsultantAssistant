@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--    Light theme colors  -->
     <color name="colorPrimary">#4d6590</color>
-    <color name="colorPrimaryDark">#2E4775</color>
+    <color name="colorPrimaryDark">#1e3b62</color>
     <color name="colorAccent">#FFDFA4</color>
     <color name="backgroundColor">#DBE8FF</color>
+    <color name="colorOnSecondary">#000000</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorOnBackground">#000000</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorOnSurface">#000000</color>
+    <color name="colorError">#B00020</color>
+    <color name="colorOnError">#FFFFFF</color>
+    <color name="cardBackgroundColor">#FFFFFF</color>
+
+    <!--    Night theme colors  -->
+    <color name="colorPrimaryNight">#000000</color>
+    <color name="colorPrimaryDarkNight">#121212</color>
+    <color name="colorAccentNight">#6C6D6C</color>
+    <color name="colorOnSecondaryNight">#FFFFFF</color>
+    <color name="colorOnPrimaryNight">#000000</color>
+    <color name="colorOnBackgroundNight">#FFFFFF</color>
+    <color name="colorSurfaceNight">#121212</color>
+    <color name="colorOnSurfaceNight">#FFFFFF</color>
+    <color name="colorErrorNight">#CF6679</color>
+    <color name="cardBackgroundColorNight">#263238</color>
+
+    <!--    Other attributes    -->
+    <color name="hintTextColor">#808080</color>
+    <color name="bottomNavigationIconSelectedTintColor">#1e3b62</color>
+    <color name="bottomNavigationIconSelectedTintColorNight">#FFFFFF</color>
+
 </resources>

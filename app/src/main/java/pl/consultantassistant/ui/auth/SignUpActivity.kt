@@ -14,6 +14,7 @@ import org.kodein.di.generic.instance
 import pl.consultantassistant.R
 import pl.consultantassistant.databinding.SignupLayoutBinding
 import pl.consultantassistant.utils.AuthListener
+import pl.consultantassistant.utils.setAppTheme
 import pl.consultantassistant.utils.startHomeActivity
 
 class SignUpActivity : AppCompatActivity(), AuthListener, KodeinAware {
@@ -24,6 +25,7 @@ class SignUpActivity : AppCompatActivity(), AuthListener, KodeinAware {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setAppTheme()
 
         val binding: SignupLayoutBinding =
             DataBindingUtil.setContentView(this, R.layout.signup_layout)

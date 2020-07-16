@@ -5,7 +5,7 @@
     <item
         android:id="@+id/menu_logout"
         android:icon="@drawable/ic_sign_out"
-        android:orderInCategory="103"
+        android:orderInCategory="104"
         android:title="@string/log_out"
         app:showAsAction="never" />
 
@@ -35,14 +35,23 @@
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/menu_action_sort_alphabetically"
+                    android:icon="@drawable/ic_sort_by_alpha"
                     android:title="@string/menu_action_sort_alphabetically_title" />
                 <item
                     android:id="@+id/menu_action_sort_by_customer_level"
+                    android:icon="@drawable/ic_sort"
                     android:title="@string/menu_action_sort_by_customer_level_title" />
             </group>
 
         </menu>
 
     </item>
+
+    <item
+        android:id="@+id/menu_style_mode"
+        android:orderInCategory="103"
+        android:checkable="true"
+        android:title="@string/menu_stye_mode_title"
+        app:showAsAction="never" />
 
 </menu>

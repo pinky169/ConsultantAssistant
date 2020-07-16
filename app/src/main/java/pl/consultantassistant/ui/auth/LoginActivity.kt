@@ -23,6 +23,7 @@ import pl.consultantassistant.R
 import pl.consultantassistant.databinding.LoginLayoutBinding
 import pl.consultantassistant.utils.AuthListener
 import pl.consultantassistant.utils.BillingUtils
+import pl.consultantassistant.utils.setAppTheme
 import pl.consultantassistant.utils.startHomeActivity
 
 class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware, BillingUtils.PurchaseListener {
@@ -35,6 +36,7 @@ class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware, BillingUti
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setAppTheme()
 
         billingUtils = BillingUtils(this).getInstance()!!
         billingClient = billingUtils.setupBillingClient()

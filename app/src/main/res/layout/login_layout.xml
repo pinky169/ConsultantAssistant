@@ -60,12 +60,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/email_label"
+                    android:textAllCaps="true"
                     android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/edittext_email_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:autofillHints="emailAddress"
                     android:gravity="center_vertical"
                     android:hint="@string/email_hint"
                     android:inputType="textEmailAddress"
@@ -75,13 +77,16 @@
                     android:id="@+id/textview_password_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:text="@string/password_label"
+                    android:textAllCaps="true"
                     android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/edittext_password_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:autofillHints="password"
                     android:hint="@string/password_hint"
                     android:importantForAutofill=""
                     android:inputType="textPassword"

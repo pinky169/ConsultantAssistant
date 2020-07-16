@@ -24,16 +24,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:labelFor="@id/name_edit_text"
-                android:textAllCaps="true"
                 android:text="@string/name_edit_text_label_text"
-                android:textColor="@android:color/black"
+                android:textAllCaps="true"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/name_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autofillHints="name"
                 android:hint="@string/name_edit_text_hint"
                 android:inputType="textPersonName|textCapSentences" />
 
@@ -41,16 +40,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:labelFor="@id/surname_edit_text"
-                android:textAllCaps="true"
                 android:text="@string/surname_edit_text_label_text"
-                android:textColor="@android:color/black"
+                android:textAllCaps="true"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/surname_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autofillHints="surname"
                 android:hint="@string/surname_edit_text_hint"
                 android:inputType="textPersonName|textCapSentences" />
 
@@ -61,13 +59,13 @@
                 android:labelFor="@id/name_edit_text"
                 android:text="@string/email_label_text"
                 android:textAllCaps="true"
-                android:textColor="@android:color/black"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/email_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autofillHints="emailAddress"
                 android:hint="@string/email_edit_text_hint"
                 android:inputType="textEmailAddress" />
 
@@ -76,9 +74,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:labelFor="@id/customer_level_spinner"
-                android:textAllCaps="true"
                 android:text="@string/customer_level_spinner_label_text"
-                android:textColor="@android:color/black"
+                android:textAllCaps="true"
                 android:textStyle="bold" />
 
             <Spinner
@@ -87,6 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:entries="@array/user_levels_array"
+                android:popupBackground="?attr/colorSurface"
                 android:spinnerMode="dropdown"
                 tools:listitem="@layout/support_simple_spinner_dropdown_item" />
 

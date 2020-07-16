@@ -17,6 +17,7 @@ import pl.consultantassistant.data.models.Customer
 import pl.consultantassistant.ui.customer_details_activity.viewmodel.CustomerDetailsViewModel
 import pl.consultantassistant.ui.customer_details_activity.viewmodel.CustomerDetailsViewModelFactory
 import pl.consultantassistant.utils.LoadingListener
+import pl.consultantassistant.utils.setAppTheme
 import androidx.navigation.ui.AppBarConfiguration as AppBarConfiguration1
 
 
@@ -31,6 +32,7 @@ class CustomerDetailsActivity : AppCompatActivity(), KodeinAware, LoadingListene
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setAppTheme()
         setContentView(R.layout.customer_details_layout)
 
         customer = intent.getSerializableExtra("customer") as Customer

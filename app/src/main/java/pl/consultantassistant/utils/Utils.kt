@@ -12,6 +12,19 @@ import pl.consultantassistant.ui.auth.LoginActivity
 import pl.consultantassistant.ui.auth.SignUpActivity
 import pl.consultantassistant.ui.full_screen_photo_activity.FullScreenPhotoActivity
 import pl.consultantassistant.ui.home.HomeActivity
+import pl.consultantassistant.ui.home.HomeActivity.Companion.THEME_MODE
+import pl.consultantassistant.ui.home.HomeActivity.Companion.THEME_SHARED_PREFERENCES
+
+fun Context.setAppTheme() {
+    val sharedPrefs = getSharedPreferences(THEME_SHARED_PREFERENCES, Context.MODE_PRIVATE)
+
+    if (sharedPrefs.contains(THEME_MODE)) {
+        when (sharedPrefs.getString(THEME_MODE, "day")) {
+            "day" -> theme.applyStyle(R.style.AppTheme, true)
+            "night" -> theme.applyStyle(R.style.NightMode, true)
+        }
+    }
+}
 
 fun Context.startHomeActivity() =
     Intent(this, HomeActivity::class.java).also {

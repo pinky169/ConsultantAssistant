@@ -41,12 +41,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:text="@string/email_label"
+                    android:textAllCaps="true"
                     android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/edittext_email_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:autofillHints="emailAddress"
                     android:gravity="center_vertical"
                     android:hint="@string/email_hint"
                     android:inputType="textEmailAddress"
@@ -55,14 +57,17 @@
                 <TextView
                     android:id="@+id/textview_password_label"
                     android:layout_width="match_parent"
-                    android:layout_height="15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:text="@string/password_label"
+                    android:textAllCaps="true"
                     android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/edittext_password_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:autofillHints="password"
                     android:hint="@string/password_hint"
                     android:inputType="textPassword"
                     android:text="@={viewmodel.password}" />
@@ -71,13 +76,16 @@
                     android:id="@+id/textview_2nd_password_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:text="@string/repeat_password"
+                    android:textAllCaps="true"
                     android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/edittext_2nd_password_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:autofillHints="password"
                     android:hint="@string/confirm_your_new_password"
                     android:inputType="textPassword"
                     android:text="@={viewmodel.password2nd}" />

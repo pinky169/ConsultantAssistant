@@ -270,5 +270,6 @@
     <string name="menu_sort_title">Sortuj listę</string>
     <string name="menu_action_sort_alphabetically_title">Alfabetycznie</string>
     <string name="menu_action_sort_by_customer_level_title">Po poziomie klienta</string>
+    <string name="menu_stye_mode_title">Tryb nocny</string>
 
 </resources>

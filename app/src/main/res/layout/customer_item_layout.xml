@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
+        app:cardBackgroundColor="?attr/colorSurface"
         app:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,6 +37,7 @@
                 android:layout_height="0dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_add_a_photo"
+                android:tint="?attr/colorOnSurface"
                 app:customerIcon="@{customer}"
                 app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
                 app:layout_constraintEnd_toStartOf="@+id/linearLayout"
@@ -58,7 +60,6 @@
                     android:id="@+id/full_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
                     android:textStyle="bold"
                     app:fullNameFormatted="@{customer}" />
 
@@ -78,6 +79,7 @@
                 android:background="@android:color/transparent"
                 android:onClick="@{() -> clickListener.createPopupMenu(popupMenu, position, customer)}"
                 android:src="@drawable/ic_more_vertical"
+                android:tint="?attr/colorOnSurface"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/linearLayout"

@@ -239,7 +239,7 @@
     <string name="customers_empty_view_text">Add new customers with the button\nin the bottom right corner</string>
     <string name="customer_added_successfully_text">New customer has been successfully added</string>
     <string name="menu_search_title">Search</string>
-    <string name="email_edit_text_hint">Email adress</string>
+    <string name="email_edit_text_hint">Email address</string>
     <string name="email_label_text">Email</string>
     <string name="menu_action_edit_title">Edit</string>
     <string name="menu_action_add_new_photo_title">Add a photo</string>
@@ -255,7 +255,7 @@
     <string name="intent_image_chooser_title">Choose a photo</string>
     <string name="name_input_error_message">The name field cannot be empty</string>
     <string name="surname_input_error_message">The surname field cannot be empty</string>
-    <string name="email_input_wrong_format_error_message">The email adress has the wrong format</string>
+    <string name="email_input_wrong_format_error_message">The email address has the wrong format</string>
     <string name="image_upload_success_toast_message">Photo has been successfully uploaded</string>
     <string name="image_upload_error_toast_message">Photo upload failed</string>
     <string name="menu_notification_title">Add a reminder</string>
@@ -270,5 +270,6 @@
     <string name="menu_sort_title">Sort the list</string>
     <string name="menu_action_sort_alphabetically_title">Alphabetically</string>
     <string name="menu_action_sort_by_customer_level_title">By customer level</string>
+    <string name="menu_stye_mode_title">Night mode</string>
 
 </resources>

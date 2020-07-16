@@ -25,6 +25,7 @@
             android:paddingTop="16dp"
             android:paddingEnd="8dp"
             android:paddingBottom="16dp"
+            android:popupBackground="?attr/colorSurface"
             android:spinnerMode="dropdown"
             app:layout_constraintBottom_toTopOf="@id/nested_scroll_view"
             app:layout_constraintEnd_toEndOf="parent"
